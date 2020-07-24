@@ -1,0 +1,46 @@
+<!--
+  Step 1: This is your descretion how you would like to display data,
+  but you must list display only one document based on the passed ID.
+-->
+
+<%- include ('../partials/header') %>
+
+<div class="container my-5">
+
+  <header>
+    <h1><%= climbingroute.location %> <%= climbingroute.color %> <%= climbingroute.difficulty %></h1>
+    <small><%= climbingroute.updatedAt.toLocaleString("en-CA") %></small>
+
+    <% if (authorized && (climbingroute.user.email === user.email)) { %>
+      &nbsp;&nbsp;
+      <a href="/climbingroutes/<%= climbingroute.id %>/edit">
+          <i class="fa fa-edit"></i>
+      </a>
+      &nbsp; / &nbsp;
+      <form action="/climbingroutes/delete" class="form-inline" method="POST" onsubmit="return confirm('Are you sure you want to delete your post \'<%= climbingroute.title %>\'?');">
+          <input type="hidden" value="<%= climbingroute.id %>" name="id">
+          <button type="submit" class="delete">
+              <i class="fa fa-trash"></i>
+          </button>
+      </form>
+  <% } %>
+  </header>
+
+  <hr>
+
+  <div class="content">  
+    <% if (typeof climbingroute.user !== 'undefined') { %>
+      <p>Author: <%= climbingroute.user.fullname %></p>
+    <% } %>
+    <p>Review: <%- climbingroute.review %></p>
+    <p>Description: <%- climbingroute.description %></p>
+  </div>
+
+  <br>
+  <div>    
+    <a class="btn btn-dark" onclick="goBack()">Go Back</a>
+  </div>
+
+</div>
+
+<%- include ('../partials/footer') %>
