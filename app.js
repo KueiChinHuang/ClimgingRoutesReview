@@ -81,11 +81,18 @@ app.use('/', (req, res, next) => {
 /*
   Step 7: Register our route composer
 */
-const route = require('./routes.js');
-app.use('/', route);
+const routes = require('./routes.js');
+app.use('/', routes);
+
+const clientRoot = path.join(__dirname, '/client/build');
+app.use((req, res, next) => {
+  if (req.method == 'GET' && req.accepts('html') && !req.is('json') && !req.path.includes('.')) {
+    res.sendFile('index.html', { clientRoot });
+  } else next();
+});
 
 /*
   Step 8: Start the server
 */
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
