@@ -41,7 +41,10 @@ const ClimbingrouteSchema = new mongoose.Schema({
     type: String
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: {
+    getters: true
+  }
 });
 
 ClimbingrouteSchema.virtual('title')
