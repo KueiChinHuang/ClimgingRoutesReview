@@ -8,9 +8,9 @@ import Login from './sessions/Login';
 function Routes () {
     return (
         <Switch>
-            <Route exect path="/" component={Home}/>
-            <Route exect path="/about" component={About}/>
-            <Route exect path="/login" component={Login}/>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/about" component={About}/>
+            <Route exact path="/login" component={Login}/>
         </Switch>
     );
 }

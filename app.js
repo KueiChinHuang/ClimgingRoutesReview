@@ -40,6 +40,23 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Setting up Passport JWT
+const JwtStrategy = require('passport-jwt').Strategy;
+const opts = {};
+opts.jwtFromRequest = function (req) {
+  const token = (req && req.cookies) ? req.cookies['token'] : null;
+  return token;
+}
+opts.secretOrKey = 'superSecretSaltKey';
+passport.use('jwt', new JwtStrategy(opts, function (jwt_payload, done) {
+  User.findOne({id: jwt_payload.sub}, function (err, user) {
+    if (err) return done(err, false);
+    if (user) return done(null, user);
+    return done(null, false);
+  });
+}));
+
+
 /*
   Step 4: Setup the asset pipeline, path, the static paths,
   the views directory, and the view engine
@@ -86,7 +103,7 @@ app.use('/', routes);
 
 const clientRoot = path.join(__dirname, '/client/build');
 app.use((req, res, next) => {
-  if (req.method == 'GET' && req.accepts('html') && !req.is('json') && !req.path.includes('.')) {
+  if (req.method === 'GET' && req.accepts('html') && !req.is('json') && !req.path.includes('.')) {
     res.sendFile('index.html', { clientRoot });
   } else next();
 });
