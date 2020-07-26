@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 import { Form, Container } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
-const Login = props => {
+const Login = ({setUser}) => {
 
     const [inputs, setInputs] = useState({
         email: '',
         password: ''
     });
 
+    const [redirect, setRedirect] = useState(false);
+
     const handleSubmit = async event => {
         event.preventDefault();
 
         const resp = await Axios.post('/authenticate', inputs);
-        console.log(resp);
+
+        if (resp.status === 200) {
+            setUser(resp.data.user);
+            setRedirect(true);
+        } else {
+
+        }
     };
 
     const handleInputChange = event => {
@@ -28,6 +37,7 @@ const Login = props => {
         console.log(inputs);
     };
 
+    if (redirect) return <Redirect to="/climbingroutes"/>
 
     return (
         <Container className="my-5 text-white">
