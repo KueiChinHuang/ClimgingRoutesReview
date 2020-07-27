@@ -96,19 +96,18 @@ exports.new = (req, res) => {
 };
 
 exports.create = async (req, res) => {
+  console.log(req.body)
   try {
     // console.log(req.session.passport);
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
     // console.log('User: ', user);
-    const climbingroutes = await Climbingroutes.create({ user: user._id, ...req.body });
+    const climbingroute = await Climbingroutes.create({ user: user._id, ...req.body });
 
-    req.flash('success', 'Review created successfully');
-    res.redirect(`/climbingroutes/${climbingroutes.id}`);
+    res.status(200).json(climbingroute);
+    
   } catch (error) {
-    req.flash('danger', `There was an error creating this review: ${error}`);
-    req.session.formData = req.body;
-    res.redirect(`${viewPath}/new`);
+    res.status(400).json({message: "There was an error creating this review", error});
   }
 };
 
