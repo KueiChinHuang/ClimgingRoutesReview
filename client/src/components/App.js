@@ -12,7 +12,7 @@ function App() {
     <div>
       <React.Fragment>
         <ToastContainer/>
-        <Nav/>
+        <Nav user={user}/>
         <Routes user={user} setUser={setUser}/>
       </React.Fragment>
     </div>
