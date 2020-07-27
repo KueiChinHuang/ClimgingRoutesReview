@@ -96,18 +96,18 @@ exports.new = (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  console.log(req.body)
+  console.log("In controller, req.body:", req.body)
   try {
     // console.log(req.session.passport);
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
     // console.log('User: ', user);
     const climbingroute = await Climbingroutes.create({ user: user._id, ...req.body });
-
+    console.log(climbingroute)
     res.status(200).json(climbingroute);
     
   } catch (error) {
-    res.status(400).json({message: "There was an error creating this review", error});
+    res.status(400).json({message: "There was an error creating a new item in controller", error});
   }
 };
 

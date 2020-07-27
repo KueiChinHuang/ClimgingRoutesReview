@@ -6,8 +6,8 @@ import { Redirect } from 'react-router-dom';
 const New = function () {
 
     const [inputs, setInputs] = useState({
-        color: 'BLUE',
-        location: 'WALL_A',
+        location: 'Wall A',
+        color: 'Blue',
         review: 5,
         difficulty: '',
         description: ''
@@ -18,11 +18,17 @@ const New = function () {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const resp = await Axios.post('/api/climbingroutes');
+        try {
+            
+            const resp = await Axios.post('/api/climbingroutes', inputs);
 
-        if (resp.status === 200) {
-            setRedirect(true);
+            if (resp.status === 200) {
+                setRedirect(true);
+            }
+        } catch (error) {
+            console.log("There is an issue submitting the form in New component", error);
         }
+
     };
 
     const handleInputChange = async event => {
@@ -35,7 +41,6 @@ const New = function () {
             ...inputs,
             [name]: value
         }));
-        console.log(redirect)
     };
 
     if (redirect) return (<Redirect to="/climbingroutes"/>);
@@ -56,12 +61,12 @@ const New = function () {
                             as="select"
                             name="location"
                             onChange={handleInputChange}
-                            defaultValue={inputs.location || 'WALL_A'}
+                            defaultValue={inputs.location || 'Wall A'}
                         >
-                                <option value="WALL_A">Wall A</option>
-                                <option value="WALL_B">Wall B</option>
-                                <option value="WALL_C">Wall C</option>
-                                <option value="WALL_D">Wall D</option>
+                                <option value="Wall A">Wall A</option>
+                                <option value="Wall B">Wall B</option>
+                                <option value="Wall C">Wall C</option>
+                                <option value="Wall D">Wall D</option>
                         </Form.Control>
                     </Form.Group>
                     
@@ -71,12 +76,12 @@ const New = function () {
                             as="select"
                             name="color"
                             onChange={handleInputChange}
-                            defaultValue={inputs.color || 'BLUE'}
+                            defaultValue={inputs.color || 'Blue'}
                         >
-                                <option value="BLUE">Blue</option>
-                                <option value="GREEN">Green</option>
-                                <option value="RED">Red</option>
-                                <option value="BLACK">Black</option>
+                                <option value="Blue">Blue</option>
+                                <option value="Green">Green</option>
+                                <option value="Red">Red</option>
+                                <option value="Black">Black</option>
                         </Form.Control>
                     </Form.Group>
 

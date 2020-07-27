@@ -19,7 +19,7 @@ const Index = function () {
 
     return (
         <Container className="my-5">
-            <header>
+            <header className="text-white">
                 <h1>Archive</h1>
             </header>
 
@@ -30,7 +30,7 @@ const Index = function () {
                     <div key={i} className="card my-3">
                         <div className="card-header clearfix">
                             <div className="float-left">
-                                <h5 className="card title">
+                                <h5 className="card-title">
                                     {climbingroute.title}
                                 </h5>
 

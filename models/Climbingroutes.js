@@ -23,20 +23,20 @@ const ClimbingrouteSchema = new mongoose.Schema({
   },
   color: {
     type: String,
-    enum: ['BLUE', 'GREEN', 'RED', 'BLACK'],
-    default: 'BLUE',
+    // enum: ['BLUE', 'GREEN', 'RED', 'BLACK'],
+    // default: 'BLUE',
     require: true
   },
   location: {
     type: String,    
-    enum:  ['WALL_A', 'WALL_B', 'WALL_C', 'WALL_D'],
-    default: 'WALL_A',
+    // enum:  ['WALL_A', 'WALL_B', 'WALL_C', 'WALL_D'],
+    // default: 'WALL_A',
     require: true
   },
   review: {
     type: Number,
-    enum: [1, 2, 3, 4, 5],
-    default: 5,
+    // enum: [1, 2, 3, 4, 5],
+    // default: 5,
     require: true
   },
   difficulty: {
