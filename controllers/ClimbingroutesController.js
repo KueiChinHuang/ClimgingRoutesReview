@@ -68,7 +68,6 @@ exports.index = async (req, res) => {
 
 exports.show = async (req, res) => {
   try {
-    // console.log(req.params);
     // get climbingroute info
     const climbingroute = await Climbingroutes.findById(req.params.id)
       .populate('user');
@@ -77,15 +76,15 @@ exports.show = async (req, res) => {
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
 
-    res.render(`${viewPath}/show`, {
-      pageTitle: climbingroute.name,
-      climbingroute: climbingroute,
-      user: user
-    });
+    // res.render(`${viewPath}/show`, {
+    //   pageTitle: climbingroute.name,
+    //   climbingroute: climbingroute,
+    //   user: user
+    // });
+
+    res.status(200).json(climbingroute);
   } catch (error) {
-    // console.log(`Error in controller show: ${error}`);
-    req.flash('danger', `There was an error displaying this blog: ${error}`);
-    res.redirect(`${viewPath}`);
+    res.status(400).json({message: "There was an error displaying this blog"});
   }
 };
 
