@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Login from './sessions/Login';
 
+import Climbingroutes from './climbingroutes/Index';
+
 function Routes ({setUser}) {
     return (
         <Switch>
@@ -16,6 +18,7 @@ function Routes ({setUser}) {
                     setUser={setUser}
                 />
             }/>
+            <Route exact path="/climbingroutes" component={Climbingroutes}/>
         </Switch>
     );
 }

@@ -20,12 +20,6 @@ const Climbingroutes = require("../models/Climbingroutes");
 
 exports.index = async (req, res) => {
   try {    
-    // <%= console.log(`In climbingroutes form, formData: ${JSON.stringify(formData, null, 2)}`)%>
-    // <%= console.log(`In Index View, climbingroute: ${JSON.stringify(climbingroute, null, 2)}`)%>    
-    // <%= console.log(`In Index View, /climbingroutes/${climbingroute.id}`)%>
-
-
-    // console.log(`In controller, req.query: ${JSON.stringify(req.query, null, 2)}`);
     let [queryLocation, queryColor, queryReview, queryDifficulty] = [{}, {}, {}, {}];
     if (req.query.location != '0') queryLocation = {location: req.query.location};
     if (req.query.color != '0') queryColor = {color: req.query.color};    
@@ -48,15 +42,6 @@ exports.index = async (req, res) => {
       .sort({ updatedAt: 'desc' });
     }
 
-    /* // This would make the index shows nothing when people first come to this index page without searching for anything
-    const climbingroutes = await Climbingroutes
-    .find(queryLocation)
-    // .find(queryColor)
-    .find()
-    .populate('user')
-    .sort({ updatedAt: 'desc' });
-    */
-
     let user = {};
     if (typeof (req.session.passport) == 'undefined') {
       req.session.passport = {};
@@ -65,16 +50,19 @@ exports.index = async (req, res) => {
       user = await User.findOne({ email: email });
     }
 
-    res.render(`${viewPath}/index`, {
-      pageTitle: 'Reviews',
-      climbingroutes: climbingroutes,
-      user: user,
-      formData: req.query
-    })
+    // res.render(`${viewPath}/index`, {
+    //   pageTitle: 'Reviews',
+    //   climbingroutes: climbingroutes,
+    //   user: user,
+    //   formData: req.query
+    // });
+
+    res.status(200).json(climbingroutes);
 
   } catch (error) {
-    req.flash('danger', `There was an error displaying the reviews: ${error}`)
-    res.redirect('/');
+    // req.flash('danger', `There was an error displaying the reviews: ${error}`)
+    // res.redirect('/');
+    res.status(400).json({message: 'There was an error fetching the climbingroutes', error});
   }
 };
 
