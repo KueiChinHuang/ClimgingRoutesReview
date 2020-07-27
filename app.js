@@ -83,7 +83,7 @@ app.use('/', (req, res, next) => {
   Step 7: Register our route composer
 */
 const routes = require('./routes.js');
-app.use('/', routes);
+app.use('/api', routes);
 
 const clientRoot = path.join(__dirname, '/client/build');
 app.use((req, res, next) => {

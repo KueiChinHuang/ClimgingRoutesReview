@@ -18,7 +18,7 @@ const New = function () {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const resp = await Axios.post('/climbingroutes');
+        const resp = await Axios.post('/api/climbingroutes');
 
         if (resp.status === 200) {
             setRedirect(true);
@@ -56,7 +56,6 @@ const New = function () {
                             as="select"
                             name="location"
                             onChange={handleInputChange}
-                            value={inputs.location}
                             defaultValue={inputs.location || 'WALL_A'}
                         >
                                 <option value="WALL_A">Wall A</option>
@@ -72,7 +71,6 @@ const New = function () {
                             as="select"
                             name="color"
                             onChange={handleInputChange}
-                            value={inputs.color}
                             defaultValue={inputs.color || 'BLUE'}
                         >
                                 <option value="BLUE">Blue</option>
@@ -88,7 +86,6 @@ const New = function () {
                             as="select"
                             name="review"
                             onChange={handleInputChange}
-                            value={inputs.review}
                             defaultValue={inputs.review || 5}
                         >
                                 <option value="1">1</option>

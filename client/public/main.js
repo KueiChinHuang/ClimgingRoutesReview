@@ -2,6 +2,7 @@ function goBack() {
     window.history.back();
   }
 
+  /*
   //Get the button
 var topBtn = document.getElementById("topBtn");
 
@@ -21,3 +22,4 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+*/

@@ -12,7 +12,7 @@ const Index = function () {
     }, []);
 
     const getClimbingroutes = async () => {
-        const climbingroutesResp = await Axios.get('/climbingroutes');
+        const climbingroutesResp = await Axios.get('/api/climbingroutes');
         console.log(climbingroutesResp);
         if (climbingroutesResp.status === 200) setClimbingroutes(climbingroutesResp.data);
     };
