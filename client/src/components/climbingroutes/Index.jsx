@@ -20,7 +20,7 @@ const Index = function () {
     return (
         <Container className="my-5">
             <header>
-                <h1>Archieve</h1>
+                <h1>Archive</h1>
             </header>
 
             <hr/>
