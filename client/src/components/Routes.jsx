@@ -3,7 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 
 import Home from './pages/Home';
 import About from './pages/About';
+
 import Login from './sessions/Login';
+import Logout from './sessions/Logout';
 
 import Climbingroutes from './climbingroutes/Index';
 import NewClimbingroute from './climbingroutes/New';
@@ -16,6 +18,12 @@ function Routes ({user, setUser}) {
             <Route exact path="/about" component={About}/>
             <Route exact path="/login" render={
                 renderProps => <Login 
+                    {...renderProps}
+                    setUser={setUser}
+                />
+            }/>
+            <Route exact path="/logout" render={
+                renderProps => <Logout 
                     {...renderProps}
                     setUser={setUser}
                 />
