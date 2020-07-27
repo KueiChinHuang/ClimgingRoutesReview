@@ -34,7 +34,6 @@ const Login = ({setUser}) => {
             ...inputs,
             [name]: value
         }));
-        console.log(inputs);
     };
 
     if (redirect) return <Redirect to="/climbingroutes"/>
