@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Form, Container } from 'react-bootstrap';
 import Axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const New = function () {
 
@@ -23,10 +24,15 @@ const New = function () {
             const resp = await Axios.post('/api/climbingroutes', inputs);
 
             if (resp.status === 200) {
+                toast("The new review was created successfully.", {
+                    type: toast.TYPE.SUCCESS
+                })
                 setRedirect(true);
             }
         } catch (error) {
-            console.log("There is an issue submitting the form in New component", error);
+            toast("There was an issue creating the review", {
+                type: toast.TYPE.ERROR
+            });
         }
 
     };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import { Form, Container } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = ({setUser}) => {
 
@@ -15,14 +16,26 @@ const Login = ({setUser}) => {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const resp = await Axios.post('/api/authenticate', inputs);
+        try {
+            const resp = await Axios.post('/api/authenticate', inputs);
 
-        if (resp.status === 200) {
-            setUser(resp.data.user);
-            setRedirect(true);
-        } else {
-
+            if (resp.status === 200) {
+                setUser(resp.data.user);
+                toast('You have looged in successfully.', {
+                    type: toast.TYPE.SUCCESS
+                });
+                setRedirect(true);
+            } else {
+                throw "Can't log you in.";
+            }
+        } catch (error) {
+            toast("There was an issue logging you in, please check your credentials.", {
+                type: toast.TYPE.ERROR
+            });
         }
+
+
+
     };
 
     const handleInputChange = event => {
