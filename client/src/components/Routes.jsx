@@ -7,8 +7,9 @@ import Login from './sessions/Login';
 
 import Climbingroutes from './climbingroutes/Index';
 import NewClimbingroute from './climbingroutes/New';
+import EditClimbingroute from './climbingroutes/Edit';
 
-function Routes ({setUser}) {
+function Routes ({user, setUser}) {
     return (
         <Switch>
             <Route exact path="/" component={Home}/>
@@ -19,8 +20,14 @@ function Routes ({setUser}) {
                     setUser={setUser}
                 />
             }/>
-            <Route exact path="/climbingroutes" component={Climbingroutes}/>
+            <Route exact path="/climbingroutes" render={
+                renderProps => <Climbingroutes
+                    {...renderProps}
+                    user={user}
+                />
+            }/>
             <Route exact path="/climbingroutes/new" component={NewClimbingroute}/>
+            <Route exact path="/climbingroutes/edit" component={EditClimbingroute}/>
         </Switch>
     );
 }

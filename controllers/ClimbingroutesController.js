@@ -160,11 +160,10 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     await Climbingroutes.deleteOne({ _id: req.body.id });
-    req.flash('success', 'Delete successfully.');
-    res.redirect(`/${viewPath}`);
+    
+    res.status(200).json({message: "Yay."});
   } catch (error) {
-    req.falsh('danger', `Delete failed. Error: ${error}`);
-    res.redirect(`/${viewPath}`);
+    res.status(400).json({message: "There was an error deleting the blog"});
   }
 };
 

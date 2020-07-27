@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Axios from 'axios';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
-const Index = function () {
+const Index = function ({user}) {
     const [climbingroutes, setClimbingroutes] = useState([]);
 
     useEffect(() => {
@@ -13,8 +15,21 @@ const Index = function () {
 
     const getClimbingroutes = async () => {
         const climbingroutesResp = await Axios.get('/api/climbingroutes');
-        console.log(climbingroutesResp);
         if (climbingroutesResp.status === 200) setClimbingroutes(climbingroutesResp.data);
+    };
+
+    const deleteClimbingroute = async climbingroute => {
+        try {
+            const resp = await Axios.post('/api/climbingroutes/delete', {
+                id: climbingroute._id
+            });
+    
+            if (resp.status === 200) toast("The review was deleted successfully", {type: toast.TYPE.SUCCESS});
+
+            await getClimbingroutes();
+        } catch (error) {
+            toast("The review was an issue deleting the review", {type: toast.TYPE.ERROR});
+        }
     };
 
     return (
@@ -38,7 +53,34 @@ const Index = function () {
                                     <small>~{climbingroute.user.fullname}</small>
                                 ) : null}
                             </div>
+                        
+                            <div className="float-right">
+                                <small>{climbingroute.updatedAt}</small>
+                            </div>
                         </div>
+                    
+                        <div className="card-body">
+                            <p className="card-text">
+                                {climbingroute.synopsis}
+                            </p>
+                        </div>
+
+                        {typeof user !== 'undefined' ? (
+                            <div className="card-footer">
+                                <Link to={{
+                                    pathname: "/climbingroutes/edit",
+                                    state: {
+                                        id: climbingroute._id
+                                    }
+                                }}>
+                                    <i className="fa fa-edit"></i>
+                                </Link>
+
+                                <button type="button" onClick={() => deleteClimbingroute(climbingroute)}>
+                                    <i className="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        ) : null}
                     </div>
                 ))}
             </div>
