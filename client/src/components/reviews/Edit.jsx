@@ -20,8 +20,8 @@ const Edit = function (props) {
 
     useEffect(() => {
         (async () => {
-            const crResp = await Axios.get(`/api/reviews/${id}`);
-            if (crResp.status === 200) setInputs(crResp.data);
+            const reviewResp = await Axios.get(`/api/reviews/${id}`);
+            if (reviewResp.status === 200) setInputs(reviewResp.data);
         })();
     }, [id]);
 
