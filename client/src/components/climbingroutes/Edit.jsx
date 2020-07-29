@@ -11,7 +11,7 @@ const Edit = function (props) {
     const [inputs, setInputs] = useState({
         location: 'Wall A',
         color: 'Blue',
-        review: 5,
+        score: 5,
         difficulty: '',
         description: ''
     });
@@ -33,7 +33,7 @@ const Edit = function (props) {
             const resp = await Axios.post('/api/climbingroutes/update', inputs);
 
             if (resp.status === 200) {
-                toast("The new review was updated successfully.", {
+                toast("The new score was updated successfully.", {
                     type: toast.TYPE.SUCCESS
                 })
                 setRedirect(true);
@@ -41,7 +41,7 @@ const Edit = function (props) {
                 throw "The response status is not 200."
             }
         } catch (error) {
-            toast("There was an issue updating the review", {
+            toast("There was an issue updating the score", {
                 type: toast.TYPE.ERROR
             });
         }
@@ -65,7 +65,7 @@ const Edit = function (props) {
     return (
         <Container className="my-5 text-white">
             <header>
-                <h1>Edit Review</h1>
+                <h1>Edit Score</h1>
             </header>
 
             <hr/>
@@ -103,12 +103,12 @@ const Edit = function (props) {
                     </Form.Group>
 
                     <Form.Group>
-                        <Form.Label>Review: </Form.Label>
+                        <Form.Label>Score: </Form.Label>
                         <Form.Control
                             as="select"
-                            name="review"
+                            name="score"
                             onChange={handleInputChange}
-                            defaultValue={inputs.review || 5}
+                            defaultValue={inputs.score || 5}
                         >
                                 <option value="1">1</option>
                                 <option value="2">2</option>

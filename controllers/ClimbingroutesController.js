@@ -20,10 +20,10 @@ const Climbingroutes = require("../models/Climbingroutes");
 
 exports.index = async (req, res) => {
   try {    
-    let [queryLocation, queryColor, queryReview, queryDifficulty] = [{}, {}, {}, {}];
+    let [queryLocation, queryColor, queryScore, queryDifficulty] = [{}, {}, {}, {}];
     if (req.query.location != '0') queryLocation = {location: req.query.location};
     if (req.query.color != '0') queryColor = {color: req.query.color};    
-    if (req.query.review != 0) queryReview = {review: req.query.review};    
+    if (req.query.score != 0) queryScore = {score: req.query.score};    
     if (req.query.difficulty != '') queryDifficulty = {difficulty: req.query.difficulty};    
 
     let climbingroutes;
@@ -36,7 +36,7 @@ exports.index = async (req, res) => {
       climbingroutes = await Climbingroutes
       .find(queryLocation)
       .find(queryColor)
-      .find(queryReview)
+      .find(queryScore)
       .find(queryDifficulty)
       .populate('user')
       .sort({ updatedAt: 'desc' });
@@ -51,7 +51,7 @@ exports.index = async (req, res) => {
     }
 
     // res.render(`${viewPath}/index`, {
-    //   pageTitle: 'Reviews',
+    //   pageTitle: 'Scores',
     //   climbingroutes: climbingroutes,
     //   user: user,
     //   formData: req.query
@@ -60,7 +60,7 @@ exports.index = async (req, res) => {
     res.status(200).json(climbingroutes);
 
   } catch (error) {
-    // req.flash('danger', `There was an error displaying the reviews: ${error}`)
+    // req.flash('danger', `There was an error displaying the scores: ${error}`)
     // res.redirect('/');
     res.status(400).json({message: 'There was an error fetching the climbingroutes', error});
   }
@@ -141,7 +141,7 @@ exports.update = async (req, res) => {
     const user = await User.findOne({ email: email });
 
     const climbingroute = await Climbingroutes.findById(req.body.id);
-    if (!climbingroute) throw 'The review can not be found.'
+    if (!climbingroute) throw 'The score can not be found.'
 
     const attributes = { user: user._id, ...req.body };
     await Climbingroutes.validate(attributes);

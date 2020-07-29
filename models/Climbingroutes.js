@@ -33,7 +33,7 @@ const ClimbingrouteSchema = new mongoose.Schema({
     // default: 'WALL_A',
     require: true
   },
-  review: {
+  score: {
     type: Number,
     // enum: [1, 2, 3, 4, 5],
     // default: 5,

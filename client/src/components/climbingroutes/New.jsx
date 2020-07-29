@@ -9,7 +9,7 @@ const New = function () {
     const [inputs, setInputs] = useState({
         location: 'Wall A',
         color: 'Blue',
-        review: 5,
+        score: 5,
         difficulty: '',
         description: ''
     });
@@ -95,9 +95,9 @@ const New = function () {
                         <Form.Label>Review: </Form.Label>
                         <Form.Control
                             as="select"
-                            name="review"
+                            name="score"
                             onChange={handleInputChange}
-                            defaultValue={inputs.review || 5}
+                            defaultValue={inputs.score || 5}
                         >
                                 <option value="1">1</option>
                                 <option value="2">2</option>
