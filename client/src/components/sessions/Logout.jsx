@@ -27,7 +27,7 @@ const Logout = ({setUser}) => {
         })();
     }, [setUser]);
 
-    if (redirect) return (<Redirect to="/climbingroutes"/>);
+    if (redirect) return (<Redirect to="/reviews"/>);
 
     return null;
 };

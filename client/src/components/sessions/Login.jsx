@@ -51,7 +51,7 @@ const Login = ({setUser}) => {
         }));
     };
 
-    if (redirect) return <Redirect to="/climbingroutes"/>
+    if (redirect) return <Redirect to="/reviews"/>
 
     return (
         <Container className="my-5 text-white">

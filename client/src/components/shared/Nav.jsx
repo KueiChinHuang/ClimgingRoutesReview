@@ -19,15 +19,15 @@ function Nav({ user }) {
                     </li>
 
                     <li className="nav-item dropdown">
-                        <a href="" className="nav-link dropdown-toggle" id="climbingroutesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reviews</a>
+                        <a href="" className="nav-link dropdown-toggle" id="reviewsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reviews</a>
 
-                        <div className="dropdown-menu" aria-labelledby="climbingroutesDropdown">
-                            <Link to="/climbingroutes" className="dropdown-item">Reviews</Link>
+                        <div className="dropdown-menu" aria-labelledby="reviewsDropdown">
+                            <Link to="/reviews" className="dropdown-item">Reviews</Link>
 
                             {user ? (
                                 <Fragment>
                                     <div className="dropdown-divider"></div>
-                                    <Link to="/climbingroutes/new" className="dropdown-item">New Review</Link>
+                                    <Link to="/reviews/new" className="dropdown-item">New Review</Link>
                                 </Fragment>
                             ) : null}
                         </div>

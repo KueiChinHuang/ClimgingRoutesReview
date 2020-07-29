@@ -1,9 +1,9 @@
 <!--
   Step 1: The form must be sharable between the new and edit views.
 -->
-<form class="mx-3" action="<%= (typeof actionPath === 'undefined') ? '/climbingroutes' : actionPath  %>" ,
+<form class="mx-3" action="<%= (typeof actionPath === 'undefined') ? '/reviews' : actionPath  %>" ,
   method="POST">
-  <%= console.log(`In climbingroutes form, formData: ${JSON.stringify(formData, null, 2)}`)%>
+  <%= console.log(`In reviews form, formData: ${JSON.stringify(formData, null, 2)}`)%>
 
   <div class="form-group">
     <% if(typeof actionPath !== 'undefined') { %>
@@ -59,6 +59,6 @@
 
   <div class="form-group">
     <button type="submit" class="btn btn-dark">Submit</button>
-    <a href="/climbingroutes" class="btn btn-dark" role="button" aria-pressed="true">Cancel</a>
+    <a href="/reviews" class="btn btn-dark" role="button" aria-pressed="true">Cancel</a>
   </div>
 </form>

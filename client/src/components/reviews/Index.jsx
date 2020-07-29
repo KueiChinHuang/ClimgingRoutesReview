@@ -5,28 +5,28 @@ import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 const Index = function ({user}) {
-    const [climbingroutes, setClimbingroutes] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         (async () => {
-            await getClimbingroutes();
+            await getReviews();
         })();
     }, []);
 
-    const getClimbingroutes = async () => {
-        const climbingroutesResp = await Axios.get('/api/climbingroutes');
-        if (climbingroutesResp.status === 200) setClimbingroutes(climbingroutesResp.data);
+    const getReviews = async () => {
+        const reviewsResp = await Axios.get('/api/reviews');
+        if (reviewsResp.status === 200) setReviews(reviewsResp.data);
     };
 
-    const deleteClimbingroute = async climbingroute => {
+    const deleteReview = async review => {
         try {
-            const resp = await Axios.post('/api/climbingroutes/delete', {
-                id: climbingroute._id
+            const resp = await Axios.post('/api/reviews/delete', {
+                id: review._id
             });
     
             if (resp.status === 200) toast("The review was deleted successfully", {type: toast.TYPE.SUCCESS});
 
-            await getClimbingroutes();
+            await getReviews();
         } catch (error) {
             toast("The review was an issue deleting the review", {type: toast.TYPE.ERROR});
         }
@@ -41,42 +41,42 @@ const Index = function ({user}) {
             <hr/>
 
             <div className="content">
-                {climbingroutes && climbingroutes.map((climbingroute, i) => (
+                {reviews && reviews.map((review, i) => (
                     <div key={i} className="card my-3">
                         <div className="card-header clearfix">
                             <div className="float-left">
                                 <h5 className="card-title">
-                                    {climbingroute.title}
+                                    {review.title}
                                 </h5>
 
-                                {climbingroute.user ? (
-                                    <small>~{climbingroute.user.fullname}</small>
+                                {review.user ? (
+                                    <small>~{review.user.fullname}</small>
                                 ) : null}
                             </div>
                         
                             <div className="float-right">
-                                <small>{climbingroute.updatedAt}</small>
+                                <small>{review.updatedAt}</small>
                             </div>
                         </div>
                     
                         <div className="card-body">
                             <p className="card-text">
-                                {climbingroute.synopsis}
+                                {review.synopsis}
                             </p>
                         </div>
 
                         {user ? (
                             <div className="card-footer">
                                 <Link to={{
-                                    pathname: "/climbingroutes/edit",
+                                    pathname: "/reviews/edit",
                                     state: {
-                                        id: climbingroute._id
+                                        id: review._id
                                     }
                                 }}>
                                     <i className="fa fa-edit"></i>
                                 </Link>
 
-                                <button type="button" onClick={() => deleteClimbingroute(climbingroute)}>
+                                <button type="button" onClick={() => deleteReview(review)}>
                                     <i className="fa fa-trash"></i>
                                 </button>
                             </div>

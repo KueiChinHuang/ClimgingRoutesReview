@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Container } from 'react-bootstrap';
 import Axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const New = function () {
+const Edit = function (props) {
+
+    const id = props.location.state.id;
 
     const [inputs, setInputs] = useState({
         location: 'Wall A',
@@ -16,21 +18,32 @@ const New = function () {
 
     const [redirect, setRedirect] = useState(false);
 
+    useEffect(() => {
+        (async () => {
+            const crResp = await Axios.get(`/api/reviews/${id}`);
+            if (crResp.status === 200) setInputs(crResp.data);
+        })();
+    }, [id]);
+
     const handleSubmit = async event => {
         event.preventDefault();
 
         try {
             
-            const resp = await Axios.post('/api/climbingroutes', inputs);
+            const resp = await Axios.post('/api/reviews/update', inputs);
 
             if (resp.status === 200) {
-                toast("The new review was created successfully.", {
+                toast("The new review was updated successfully.", {
                     type: toast.TYPE.SUCCESS
                 })
                 setRedirect(true);
+            } else {                
+                toast("There was an issue updating the review", {
+                    type: toast.TYPE.ERROR
+                });
             }
         } catch (error) {
-            toast("There was an issue creating the review", {
+            toast("There was an issue updating the review", {
                 type: toast.TYPE.ERROR
             });
         }
@@ -49,12 +62,12 @@ const New = function () {
         }));
     };
 
-    if (redirect) return (<Redirect to="/climbingroutes"/>);
+    if (redirect) return (<Redirect to="/reviews"/>);
 
     return (
         <Container className="my-5 text-white">
             <header>
-                <h1>Add New Review</h1>
+                <h1>Edit Score</h1>
             </header>
 
             <hr/>
@@ -92,7 +105,7 @@ const New = function () {
                     </Form.Group>
 
                     <Form.Group>
-                        <Form.Label>Review: </Form.Label>
+                        <Form.Label>Score: </Form.Label>
                         <Form.Control
                             as="select"
                             name="score"
@@ -127,7 +140,7 @@ const New = function () {
                     </Form.Group>
 
                     <Form.Group>
-                        <button type="submit" className="btn btn-primary">Create</button>
+                        <button type="submit" className="btn btn-primary">Update</button>
                     </Form.Group>
                 </Form>
             </div>
@@ -136,4 +149,4 @@ const New = function () {
 
 };
 
-export default New;
+export default Edit;

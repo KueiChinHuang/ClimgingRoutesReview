@@ -7,9 +7,9 @@ import About from './pages/About';
 import Login from './sessions/Login';
 import Logout from './sessions/Logout';
 
-import Climbingroutes from './climbingroutes/Index';
-import NewClimbingroute from './climbingroutes/New';
-import EditClimbingroute from './climbingroutes/Edit';
+import Reviews from './reviews/Index';
+import NewReview from './reviews/New';
+import EditReview from './reviews/Edit';
 
 function Routes ({user, setUser}) {
     return (
@@ -28,14 +28,14 @@ function Routes ({user, setUser}) {
                     setUser={setUser}
                 />
             }/>
-            <Route exact path="/climbingroutes" render={
-                renderProps => <Climbingroutes
+            <Route exact path="/reviews" render={
+                renderProps => <Reviews
                     {...renderProps}
                     user={user}
                 />
             }/>
-            <Route exact path="/climbingroutes/new" component={NewClimbingroute}/>
-            <Route exact path="/climbingroutes/edit" component={EditClimbingroute}/>
+            <Route exact path="/reviews/new" component={NewReview}/>
+            <Route exact path="/reviews/edit" component={EditReview}/>
         </Switch>
     );
 }

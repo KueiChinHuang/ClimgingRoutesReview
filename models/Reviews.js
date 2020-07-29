@@ -15,7 +15,7 @@
 
 const mongoose = require('mongoose');
 
-const ClimbingrouteSchema = new mongoose.Schema({
+const ReviewSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -53,12 +53,12 @@ const ClimbingrouteSchema = new mongoose.Schema({
   }
 });
 
-ClimbingrouteSchema.virtual('title')
+ReviewSchema.virtual('title')
   .get(function () {
     return `${this.location} ${this.color} ${this.difficulty}`
   })
 
-ClimbingrouteSchema.virtual('synopsis')
+ReviewSchema.virtual('synopsis')
   .get(function () {
     const post = this.description;
     return post
@@ -66,4 +66,4 @@ ClimbingrouteSchema.virtual('synopsis')
       .substring(0, 250);
   });
 
-module.exports = mongoose.model('Climbingroute', ClimbingrouteSchema);
+module.exports = mongoose.model('Review', ReviewSchema);

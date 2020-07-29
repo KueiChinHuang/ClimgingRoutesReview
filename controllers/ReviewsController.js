@@ -14,9 +14,9 @@
   - update
   - delete
 */
-const viewPath = 'climbingroutes';
+const viewPath = 'reviews';
 const User = require("../models/User");
-const Climbingroutes = require("../models/Climbingroutes");
+const Reviews = require("../models/Reviews");
 
 exports.index = async (req, res) => {
   try {    
@@ -26,14 +26,14 @@ exports.index = async (req, res) => {
     if (req.query.score != 0) queryScore = {score: req.query.score};    
     if (req.query.difficulty != '') queryDifficulty = {difficulty: req.query.difficulty};    
 
-    let climbingroutes;
+    let reviews;
     if (JSON.stringify(req.query, null, 2) == '{}') {
-      climbingroutes = await Climbingroutes
+      reviews = await Reviews
       .find()
       .populate('user')
       .sort({ updatedAt: 'desc' });
     } else {
-      climbingroutes = await Climbingroutes
+      reviews = await Reviews
       .find(queryLocation)
       .find(queryColor)
       .find(queryScore)
@@ -52,24 +52,24 @@ exports.index = async (req, res) => {
 
     // res.render(`${viewPath}/index`, {
     //   pageTitle: 'Scores',
-    //   climbingroutes: climbingroutes,
+    //   reviews: reviews,
     //   user: user,
     //   formData: req.query
     // });
 
-    res.status(200).json(climbingroutes);
+    res.status(200).json(reviews);
 
   } catch (error) {
     // req.flash('danger', `There was an error displaying the scores: ${error}`)
     // res.redirect('/');
-    res.status(400).json({message: 'There was an error fetching the climbingroutes', error});
+    res.status(400).json({message: 'There was an error fetching the reviews', error});
   }
 };
 
 exports.show = async (req, res) => {
   try {
-    // get climbingroute info
-    const climbingroute = await Climbingroutes.findById(req.params.id)
+    // get review info
+    const review = await Reviews.findById(req.params.id)
       .populate('user');
 
     // get current user info
@@ -77,12 +77,12 @@ exports.show = async (req, res) => {
     const user = await User.findOne({ email: email });
 
     // res.render(`${viewPath}/show`, {
-    //   pageTitle: climbingroute.name,
-    //   climbingroute: climbingroute,
+    //   pageTitle: review.name,
+    //   review: review,
     //   user: user
     // });
 
-    res.status(200).json(climbingroute);
+    res.status(200).json(review);
   } catch (error) {
     res.status(400).json({message: "There was an error displaying this blog"});
   }
@@ -99,9 +99,9 @@ exports.create = async (req, res) => {
   try {
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
-    const climbingroute = await Climbingroutes.create({ user: user._id, ...req.body });
+    const review = await Reviews.create({ user: user._id, ...req.body });
     
-    res.status(200).json(climbingroute);
+    res.status(200).json(review);
     
   } catch (error) {
     res.status(400).json({message: "There was an error creating a new item in controller", error});
@@ -110,16 +110,16 @@ exports.create = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const climbingroute = await Climbingroutes.findById(req.params.id);
+    const review = await Reviews.findById(req.params.id);
 
     const { user: email } = req.session.passport;
     user = await User.findOne({ email: email });
 
-    if (climbingroute.user.toString() == user._id.toString()) {
+    if (review.user.toString() == user._id.toString()) {
       res.render(`${viewPath}/edit`, {
         pageTitle: 'Edit',
         user: user,
-        formData: climbingroute
+        formData: review
       })
     } else {
       throw 'You are not the author.'
@@ -140,12 +140,12 @@ exports.update = async (req, res) => {
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
 
-    const climbingroute = await Climbingroutes.findById(req.body.id);
-    if (!climbingroute) throw 'The score can not be found.'
+    const review = await Reviews.findById(req.body.id);
+    if (!review) throw 'The score can not be found.'
 
     const attributes = { user: user._id, ...req.body };
-    await Climbingroutes.validate(attributes);
-    await Climbingroutes.findByIdAndUpdate(attributes.id, attributes);
+    await Reviews.validate(attributes);
+    await Reviews.findByIdAndUpdate(attributes.id, attributes);
 
     req.flash('success', 'Update successfully.');
     res.redirect(`${req.body.id}`);
@@ -158,7 +158,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    await Climbingroutes.deleteOne({ _id: req.body.id });
+    await Reviews.deleteOne({ _id: req.body.id });
     
     res.status(200).json({message: "Yay."});
   } catch (error) {
