@@ -39,21 +39,21 @@ h1 {
   display: inline-block;
 }
 
-.form-inline > .delete {
+button.delete {
   color: #007bff;
   border-width: 0;
   background: none;
   padding: 0;
-  margin: 0;
+  margin: 0 10px 0 10px;
 }
 
-.form-inline > .delete:hover{
+button.delete:hover{
   color: #0056b3;
 }
 
-a:hover {
+/* a:hover {
   text-decoration: none;
-}
+} */
 
 /* Button to go to the top of the page */
 #topBtn {  
