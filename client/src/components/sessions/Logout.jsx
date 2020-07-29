@@ -18,12 +18,14 @@ const Logout = ({setUser}) => {
                         type: toast.TYPE.SUCCESS
                     });
                     setRedirect(true);
+                } else {
+                    toast("There was an error while attempting to log you out", {type: toast.TYPE.ERROR});
                 }
             } catch (error) {
                 toast("There was an error while attempting to log you out", {type: toast.TYPE.ERROR});
             }
         })();
-    }, []);
+    }, [setUser]);
 
     if (redirect) return (<Redirect to="/climbingroutes"/>);
 

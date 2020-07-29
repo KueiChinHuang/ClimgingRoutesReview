@@ -26,7 +26,9 @@ const Login = ({setUser}) => {
                 });
                 setRedirect(true);
             } else {
-                throw "Can't log you in.";
+                toast("There was an issue logging you in, please check your credentials.", {
+                    type: toast.TYPE.ERROR
+                });
             }
         } catch (error) {
             toast("There was an issue logging you in, please check your credentials.", {

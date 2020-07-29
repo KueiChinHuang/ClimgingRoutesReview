@@ -23,7 +23,7 @@ const Edit = function (props) {
             const crResp = await Axios.get(`/api/climbingroutes/${id}`);
             if (crResp.status === 200) setInputs(crResp.data);
         })();
-    }, []);
+    }, [id]);
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -33,15 +33,17 @@ const Edit = function (props) {
             const resp = await Axios.post('/api/climbingroutes/update', inputs);
 
             if (resp.status === 200) {
-                toast("The new score was updated successfully.", {
+                toast("The new review was updated successfully.", {
                     type: toast.TYPE.SUCCESS
                 })
                 setRedirect(true);
-            } else {
-                throw "The response status is not 200."
+            } else {                
+                toast("There was an issue updating the review", {
+                    type: toast.TYPE.ERROR
+                });
             }
         } catch (error) {
-            toast("There was an issue updating the score", {
+            toast("There was an issue updating the review", {
                 type: toast.TYPE.ERROR
             });
         }
