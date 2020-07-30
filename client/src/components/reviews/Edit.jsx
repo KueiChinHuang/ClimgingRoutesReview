@@ -8,6 +8,37 @@ const Edit = function (props) {
 
     const id = props.location.state.id;
 
+    
+    // Set up options for color, location, and score
+    const [colorOptions, setColorOptions] = useState([]);
+    const [locationOptions, setLocationOptions] = useState([]);
+    const [scoreOptions, setScoreOptions] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            await getColorOptions();
+            await getLocationOptions();
+            await getScoreOptions();
+        })();
+    }, []);
+  
+    const getColorOptions = async () => {
+        const colorOptionsResp = await Axios.get('/api/reviews/colorOptions');
+        if (colorOptionsResp.status === 200) setColorOptions(colorOptionsResp.data);
+    };
+  
+    const getLocationOptions = async () => {
+        const locationOptionsResp = await Axios.get('/api/reviews/locationOptions');
+        if (locationOptionsResp.status === 200) setLocationOptions(locationOptionsResp.data);
+    };
+  
+    const getScoreOptions = async () => {
+        const scoreOptionsResp = await Axios.get('/api/reviews/scoreOptions');
+        console.log(scoreOptionsResp);
+        if (scoreOptionsResp.status === 200) setScoreOptions(scoreOptionsResp.data);
+    };
+
+
     const [inputs, setInputs] = useState({
         location: 'Wall A',
         color: 'Blue',
@@ -80,12 +111,11 @@ const Edit = function (props) {
                             as="select"
                             name="location"
                             onChange={handleInputChange}
-                            defaultValue={inputs.location || 'Wall A'}
+                            value={inputs.location}
                         >
-                                <option value="Wall A">Wall A</option>
-                                <option value="Wall B">Wall B</option>
-                                <option value="Wall C">Wall C</option>
-                                <option value="Wall D">Wall D</option>
+                            {locationOptions.map((opt, i) => (
+                                <option key={i} value={opt}>{opt}</option>
+                            ))}
                         </Form.Control>
                     </Form.Group>
                     
@@ -95,12 +125,11 @@ const Edit = function (props) {
                             as="select"
                             name="color"
                             onChange={handleInputChange}
-                            defaultValue={inputs.color || 'Blue'}
+                            value={inputs.color}
                         >
-                                <option value="Blue">Blue</option>
-                                <option value="Green">Green</option>
-                                <option value="Red">Red</option>
-                                <option value="Black">Black</option>
+                            {colorOptions.map((opt, i) => (
+                                <option key={i} value={opt}>{opt}</option>
+                            ))}
                         </Form.Control>
                     </Form.Group>
 
@@ -110,13 +139,11 @@ const Edit = function (props) {
                             as="select"
                             name="score"
                             onChange={handleInputChange}
-                            defaultValue={inputs.score || 5}
+                            value={inputs.score}
                         >
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                            {scoreOptions.map((opt, i) => (
+                                <option key={i} value={opt}>{opt}</option>
+                            ))}
                         </Form.Control>
                     </Form.Group>
 
