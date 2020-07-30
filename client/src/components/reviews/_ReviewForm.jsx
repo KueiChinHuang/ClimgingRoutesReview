@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Col } from 'react-bootstrap';
 import Axios from 'axios';
 
-const ReviewForm = function ({handleSubmit, inputs, setInputs}) {
-    
+const ReviewForm = function ({ handleSubmit, inputs, setInputs }) {
+
     // Set up options for color, location, and score
     const [colorOptions, setColorOptions] = useState([]);
     const [locationOptions, setLocationOptions] = useState([]);
@@ -16,17 +16,17 @@ const ReviewForm = function ({handleSubmit, inputs, setInputs}) {
             await getScoreOptions();
         })();
     }, []);
-  
+
     const getColorOptions = async () => {
         const colorOptionsResp = await Axios.get('/api/reviews/colorOptions');
         if (colorOptionsResp.status === 200) setColorOptions(colorOptionsResp.data);
     };
-  
+
     const getLocationOptions = async () => {
         const locationOptionsResp = await Axios.get('/api/reviews/locationOptions');
         if (locationOptionsResp.status === 200) setLocationOptions(locationOptionsResp.data);
     };
-  
+
     const getScoreOptions = async () => {
         const scoreOptionsResp = await Axios.get('/api/reviews/scoreOptions');
         console.log(scoreOptionsResp);
@@ -44,11 +44,11 @@ const ReviewForm = function ({handleSubmit, inputs, setInputs}) {
             [name]: value
         }));
     };
-    
+
     return (
-        <div>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group>
+        <Form>
+            <Form.Row className="py-2">
+                <Col>
                     <Form.Label>Location: </Form.Label>
                     <Form.Control
                         as="select"
@@ -60,9 +60,8 @@ const ReviewForm = function ({handleSubmit, inputs, setInputs}) {
                             <option key={i} value={opt}>{opt}</option>
                         ))}
                     </Form.Control>
-                </Form.Group>
-
-                <Form.Group>
+                </Col>
+                <Col>
                     <Form.Label>Color: </Form.Label>
                     <Form.Control
                         as="select"
@@ -74,9 +73,8 @@ const ReviewForm = function ({handleSubmit, inputs, setInputs}) {
                             <option key={i} value={opt}>{opt}</option>
                         ))}
                     </Form.Control>
-                </Form.Group>
-
-                <Form.Group>
+                </Col>
+                <Col>
                     <Form.Label>Score: </Form.Label>
                     <Form.Control
                         as="select"
@@ -88,18 +86,19 @@ const ReviewForm = function ({handleSubmit, inputs, setInputs}) {
                             <option key={i} value={opt}>{opt}</option>
                         ))}
                     </Form.Control>
-                </Form.Group>
-
-                <Form.Group>
+                </Col>
+                <Col>
                     <Form.Label>Difficulty: </Form.Label>
                     <Form.Control
                         name="difficulty"
                         onChange={handleInputChange}
                         value={inputs.difficulty}
                     />
-                </Form.Group>
+                </Col>
+            </Form.Row>
 
-                <Form.Group>
+            <Form.Row className="py-2">
+                <Col>
                     <Form.Label>Description:</Form.Label>
                     <Form.Control
                         as="textarea"
@@ -107,13 +106,16 @@ const ReviewForm = function ({handleSubmit, inputs, setInputs}) {
                         name="description"
                         onChange={handleInputChange}
                         value={inputs.description} />
-                </Form.Group>
 
-                <Form.Group>
+                </Col>
+            </Form.Row>
+
+            <Form.Row className="py-4">
+                <Col>
                     <button type="submit" className="btn btn-primary">Update</button>
-                </Form.Group>
-            </Form>
-        </div>
+                </Col>
+            </Form.Row>
+        </Form>
     );
 };
 

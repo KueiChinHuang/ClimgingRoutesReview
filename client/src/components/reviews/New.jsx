@@ -40,7 +40,7 @@ const New = function () {
     return (
         <Container className="my-5 text-white">
             <header>
-                <h1>Add New Review</h1>
+                <h1>New Review</h1>
             </header>
 
             <hr/>
