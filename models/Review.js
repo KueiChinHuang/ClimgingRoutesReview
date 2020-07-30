@@ -15,6 +15,10 @@
 
 const mongoose = require('mongoose');
 
+const possibleColors = ['Blue', 'Green', 'Red', 'Black'];
+const possibleLocations = ['Wall A', 'Wall B', 'Wall C', 'Wall D'];
+const possibleScores = [1, 2, 3, 4, 5];
+
 const ReviewSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -23,8 +27,8 @@ const ReviewSchema = new mongoose.Schema({
   },
   color: {
     type: String,
-    // enum: ['BLUE', 'GREEN', 'RED', 'BLACK'],
-    // default: 'BLUE',
+    enum: possibleColors,
+    default: 'Blue',
     require: true
   },
   location: {
@@ -52,6 +56,8 @@ const ReviewSchema = new mongoose.Schema({
     getters: true
   }
 });
+
+ReviewSchema.statics.colorOptions = () => possibleColors;
 
 ReviewSchema.virtual('title')
   .get(function () {

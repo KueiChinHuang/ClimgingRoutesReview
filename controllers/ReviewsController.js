@@ -16,7 +16,23 @@
 */
 const viewPath = 'reviews';
 const User = require("../models/User");
-const Reviews = require("../models/Reviews");
+const Review = require("../models/Review");
+
+exports.colorOptions = async (req, res) => {
+  try {
+    const colorOptions = await Review.colorOptions();
+  } catch (error) {
+
+  }
+};
+
+exports.locationOptions = async (req, res) => {
+  
+};
+
+exports.scoreOptions = async (req, res) => {
+  
+};
 
 exports.index = async (req, res) => {
   try {    
@@ -28,12 +44,12 @@ exports.index = async (req, res) => {
 
     let reviews;
     if (JSON.stringify(req.query, null, 2) == '{}') {
-      reviews = await Reviews
+      reviews = await Review
       .find()
       .populate('user')
       .sort({ updatedAt: 'desc' });
     } else {
-      reviews = await Reviews
+      reviews = await Review
       .find(queryLocation)
       .find(queryColor)
       .find(queryScore)
@@ -69,7 +85,7 @@ exports.index = async (req, res) => {
 exports.show = async (req, res) => {
   try {
     // get review info
-    const review = await Reviews.findById(req.params.id)
+    const review = await Review.findById(req.params.id)
       .populate('user');
 
     // get current user info
@@ -99,7 +115,7 @@ exports.create = async (req, res) => {
   try {
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
-    const review = await Reviews.create({ user: user._id, ...req.body });
+    const review = await Review.create({ user: user._id, ...req.body });
     
     res.status(200).json(review);
     
@@ -110,7 +126,7 @@ exports.create = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const review = await Reviews.findById(req.params.id);
+    const review = await Review.findById(req.params.id);
 
     const { user: email } = req.session.passport;
     user = await User.findOne({ email: email });
@@ -140,12 +156,12 @@ exports.update = async (req, res) => {
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
 
-    const review = await Reviews.findById(req.body.id);
+    const review = await Review.findById(req.body.id);
     if (!review) throw 'The score can not be found.'
 
     const attributes = { user: user._id, ...req.body };
-    await Reviews.validate(attributes);
-    await Reviews.findByIdAndUpdate(attributes.id, attributes);
+    await Review.validate(attributes);
+    await Review.findByIdAndUpdate(attributes.id, attributes);
 
     req.flash('success', 'Update successfully.');
     res.redirect(`${req.body.id}`);
@@ -158,7 +174,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    await Reviews.deleteOne({ _id: req.body.id });
+    await Review.deleteOne({ _id: req.body.id });
     
     res.status(200).json({message: "Yay."});
   } catch (error) {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 function Nav({ user }) {
@@ -6,9 +6,8 @@ function Nav({ user }) {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
             <Link className="navbar-brand" to="/">Climbing Routes Review</Link>
-
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
 
