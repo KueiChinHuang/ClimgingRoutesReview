@@ -1,19 +1,3 @@
-// INSTRUCTIONS:
-/*
-  Create a new resource controller that uses the
-  User as an associative collection (examples):
-  - User -> Books
-  - User -> Reservation
-
-  The resource controller must contain the 7 resource actions:
-  - index
-  - show
-  - new
-  - create
-  - edit
-  - update
-  - delete
-*/
 const viewPath = 'reviews';
 const User = require("../models/User");
 const Review = require("../models/Review");
@@ -86,12 +70,9 @@ exports.index = async (req, res) => {
     //   user: user,
     //   formData: req.query
     // });
-
     res.status(200).json(reviews);
 
   } catch (error) {
-    // req.flash('danger', `There was an error displaying the scores: ${error}`)
-    // res.redirect('/');
     res.status(400).json({message: 'There was an error fetching the reviews', error});
   }
 };
@@ -118,12 +99,6 @@ exports.show = async (req, res) => {
   }
 };
 
-exports.new = (req, res) => {
-  res.render(`${viewPath}/new`, {
-    pageTitle: 'New climbing route'
-  })
-};
-
 exports.create = async (req, res) => {
   console.log("In controller, req.body:", req.body)
   try {
@@ -138,35 +113,8 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.edit = async (req, res) => {
-  try {
-    const review = await Review.findById(req.params.id);
-
-    const { user: email } = req.session.passport;
-    user = await User.findOne({ email: email });
-
-    if (review.user.toString() == user._id.toString()) {
-      res.render(`${viewPath}/edit`, {
-        pageTitle: 'Edit',
-        user: user,
-        formData: review
-      })
-    } else {
-      throw 'You are not the author.'
-    }
-
-  } catch (error) {
-    req.flash('danger', `Edit failed: ${error}`);
-    res.redirect(`/${viewPath}/${req.params.id}`);
-  }
-
-};
-
 exports.update = async (req, res) => {
   try {
-    // console.log(`In controller, Update, req.body: ${JSON.stringify(req.body, null, 2)}`);
-    // console.log(`In controller, Update, req.session.passport: ${JSON.stringify(req.session.passport, null, 2)}`);
-
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
 

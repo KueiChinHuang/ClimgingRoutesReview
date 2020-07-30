@@ -13,7 +13,6 @@ exports.create = async (req, res) => {
   
   try {
     console.log(`In UsersController: ${JSON.stringify(req.body, null, 2)}`);
-    // Step 1: Create the new user and register them with Passport
     const user = new User(req.body);
     await User.register(user, req.body.password);
 

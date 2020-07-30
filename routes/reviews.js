@@ -1,4 +1,4 @@
-const {index, show, new: _new, create, edit, update, delete: _delete, colorOptions, locationOptions, scoreOptions} = require('../controllers/ReviewsController');
+const {index, show, create, update, delete: _delete, colorOptions, locationOptions, scoreOptions} = require('../controllers/ReviewsController');
 
 function auth(req, res, next) {
     if (!req.isAuthenticated()) {
@@ -12,10 +12,8 @@ module.exports = router => {
     router.get('/reviews/locationOptions', locationOptions);
     router.get('/reviews/scoreOptions', scoreOptions);
     router.get('/reviews', index);
-    router.get('/reviews/new',auth, _new);
     router.post('/reviews',auth, create);
     router.post('/reviews/update',auth, update);
     router.post('/reviews/delete',auth, _delete);
-    router.get('/reviews/:id/edit',auth, edit);
     router.get('/reviews/:id', show);
 };
