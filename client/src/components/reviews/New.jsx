@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 const New = function () {
 
-    // Set up color options
+    // Set up options for color, location, and score
     const [colorOptions, setColorOptions] = useState([]);
     const [locationOptions, setLocationOptions] = useState([]);
     const [scoreOptions, setScoreOptions] = useState([]);
@@ -98,7 +98,7 @@ const New = function () {
                             as="select"
                             name="location"
                             onChange={handleInputChange}
-                            defaultValue={inputs.location || 'Wall A'}
+                            value={inputs.location}
                         >
                             {locationOptions.map((opt, i) => (
                                 <option key={i} value={opt}>{opt}</option>
@@ -112,7 +112,7 @@ const New = function () {
                             as="select"
                             name="color"
                             onChange={handleInputChange}
-                            defaultValue={inputs.color || 'Blue'}
+                            value={inputs.color}
                         >
                             {colorOptions.map((opt, i) => (
                                 <option key={i} value={opt}>{opt}</option>
@@ -126,7 +126,7 @@ const New = function () {
                             as="select"
                             name="score"
                             onChange={handleInputChange}
-                            defaultValue={inputs.score || 5}
+                            value={inputs.score}
                         >
                             {scoreOptions.map((opt, i) => (
                                 <option key={i} value={opt}>{opt}</option>

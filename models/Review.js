@@ -17,7 +17,7 @@ const mongoose = require('mongoose');
 
 const possibleColors = ['Blue', 'Green', 'Red', 'Black'];
 const possibleLocations = ['Wall A', 'Wall B', 'Wall C', 'Wall D'];
-const possibleScores = [1, 2, 3, 4, 5];
+const possibleScores = [0, 1, 2, 3, 4, 5];
 
 const ReviewSchema = new mongoose.Schema({
   user: {
