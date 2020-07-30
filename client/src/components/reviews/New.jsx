@@ -44,7 +44,6 @@ const New = function () {
             </header>
 
             <hr/>
-
             <ReviewForm handleSubmit={handleSubmit} inputs={inputs} setInputs={setInputs}/>
 
         </Container>
