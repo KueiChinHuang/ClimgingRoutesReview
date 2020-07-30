@@ -33,14 +33,14 @@ const ReviewSchema = new mongoose.Schema({
   },
   location: {
     type: String,    
-    // enum:  ['WALL_A', 'WALL_B', 'WALL_C', 'WALL_D'],
-    // default: 'WALL_A',
+    enum:  possibleLocations,
+    default: 'Wall A',
     require: true
   },
   score: {
     type: Number,
-    // enum: [1, 2, 3, 4, 5],
-    // default: 5,
+    enum: possibleScores,
+    default: 5,
     require: true
   },
   difficulty: {
@@ -58,6 +58,8 @@ const ReviewSchema = new mongoose.Schema({
 });
 
 ReviewSchema.statics.colorOptions = () => possibleColors;
+ReviewSchema.statics.locationOptions = () => possibleLocations;
+ReviewSchema.statics.scoreOptions = () => possibleScores;
 
 ReviewSchema.virtual('title')
   .get(function () {

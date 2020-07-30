@@ -21,17 +21,31 @@ const Review = require("../models/Review");
 exports.colorOptions = async (req, res) => {
   try {
     const colorOptions = await Review.colorOptions();
+    res.status(200).json(colorOptions);    
   } catch (error) {
-
+    console.error(error);
+    res.status(400).json({status: 'failed', message: `Couldn't get the color options.`, error});
   }
 };
 
 exports.locationOptions = async (req, res) => {
-  
+  try {
+    const locationOptions = await Review.locationOptions();
+    res.status(200).json(locationOptions);    
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({status: 'failed', message: `Couldn't get the location options.`, error});
+  }
 };
 
 exports.scoreOptions = async (req, res) => {
-  
+  try {
+    const scoreOptions = await Review.scoreOptions();
+    res.status(200).json(scoreOptions);    
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({status: 'failed', message: `Couldn't get the score options.`, error});
+  }
 };
 
 exports.index = async (req, res) => {
