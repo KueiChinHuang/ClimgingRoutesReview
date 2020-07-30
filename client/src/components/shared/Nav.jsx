@@ -45,7 +45,7 @@ function Nav({ user }) {
                     ) : (
                         <Fragment>
                             <li className="nav-item">
-                                <Link to="/users/new" className="nav-link">
+                                <Link to="/register" className="nav-link">
                                     <i className="fa fa-user-plus"></i>
                                 Register
                             </Link>
