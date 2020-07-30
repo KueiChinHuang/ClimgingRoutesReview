@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 const Index = function ({ user }) {
+    const [inputs, setInputs] = useState([]);
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
@@ -14,7 +15,12 @@ const Index = function ({ user }) {
     }, []);
 
     const getReviews = async () => {
-        const reviewsResp = await Axios.get('/api/reviews');
+        const reviewsResp = await Axios.get('/api/reviews', {
+            params: {
+              foo: 'bar'
+            }
+          });
+        console.log(reviewsResp)
         if (reviewsResp.status === 200) setReviews(reviewsResp.data);
     };
 
@@ -51,6 +57,8 @@ const Index = function ({ user }) {
             <header className="text-white">
                 <h1>Climbing Route Reviews</h1>
             </header>
+
+
 
             <hr />
 

@@ -35,55 +35,53 @@ const OptionsForm = function ({ handleInputChange, inputs, setInputs }) {
 
     return (
         <Fragment>
-            <Form.Row className="py-2">
-                <Col>
-                    <Form.Label>Location: </Form.Label>
-                    <Form.Control
-                        as="select"
-                        name="location"
-                        onChange={handleInputChange}
-                        value={inputs.location}
-                    >
-                        {locationOptions.map((opt, i) => (
-                            <option key={i} value={opt}>{opt}</option>
-                        ))}
-                    </Form.Control>
-                </Col>
-                <Col>
-                    <Form.Label>Color: </Form.Label>
-                    <Form.Control
-                        as="select"
-                        name="color"
-                        onChange={handleInputChange}
-                        value={inputs.color}
-                    >
-                        {colorOptions.map((opt, i) => (
-                            <option key={i} value={opt}>{opt}</option>
-                        ))}
-                    </Form.Control>
-                </Col>
-                <Col>
-                    <Form.Label>Score: </Form.Label>
-                    <Form.Control
-                        as="select"
-                        name="score"
-                        onChange={handleInputChange}
-                        value={inputs.score}
-                    >
-                        {scoreOptions.map((opt, i) => (
-                            <option key={i} value={opt}>{opt}</option>
-                        ))}
-                    </Form.Control>
-                </Col>
-                <Col>
-                    <Form.Label>Difficulty: </Form.Label>
-                    <Form.Control
-                        name="difficulty"
-                        onChange={handleInputChange}
-                        value={inputs.difficulty}
-                    />
-                </Col>
-            </Form.Row>
+            <Col>
+                <Form.Label>Location: </Form.Label>
+                <Form.Control
+                    as="select"
+                    name="location"
+                    onChange={handleInputChange}
+                    value={inputs.location}
+                >
+                    {locationOptions.map((opt, i) => (
+                        <option key={i} value={opt}>{opt}</option>
+                    ))}
+                </Form.Control>
+            </Col>
+            <Col>
+                <Form.Label>Color: </Form.Label>
+                <Form.Control
+                    as="select"
+                    name="color"
+                    onChange={handleInputChange}
+                    value={inputs.color}
+                >
+                    {colorOptions.map((opt, i) => (
+                        <option key={i} value={opt}>{opt}</option>
+                    ))}
+                </Form.Control>
+            </Col>
+            <Col>
+                <Form.Label>Score: </Form.Label>
+                <Form.Control
+                    as="select"
+                    name="score"
+                    onChange={handleInputChange}
+                    value={inputs.score}
+                >
+                    {scoreOptions.map((opt, i) => (
+                        <option key={i} value={opt}>{opt}</option>
+                    ))}
+                </Form.Control>
+            </Col>
+            <Col>
+                <Form.Label>Difficulty: </Form.Label>
+                <Form.Control
+                    name="difficulty"
+                    onChange={handleInputChange}
+                    value={inputs.difficulty}
+                />
+            </Col>
         </Fragment>
     );
 };

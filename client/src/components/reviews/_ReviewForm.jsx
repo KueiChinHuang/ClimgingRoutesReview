@@ -19,7 +19,10 @@ const ReviewForm = function ({ handleSubmit, inputs, setInputs }) {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <OptionsForm handleInputChange={handleInputChange} inputs={inputs} setInputs={setInputs} />
+            
+            <Form.Row className="py-2">
+                <OptionsForm handleInputChange={handleInputChange} inputs={inputs} setInputs={setInputs} />
+            </Form.Row>
             <Form.Row className="py-2">
                 <Col>
                     <Form.Label>Description:</Form.Label>

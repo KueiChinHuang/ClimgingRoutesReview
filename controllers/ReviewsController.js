@@ -2,6 +2,15 @@ const viewPath = 'reviews';
 const User = require("../models/User");
 const Review = require("../models/Review");
 
+const getUser = async req => {
+  let user = {};
+  if (typeof (req.session.passport) !== 'undefined') {
+    const { user: email } = req.session.passport;
+    user = await User.findOne({ email: email });
+  }  
+  return user;
+}
+
 exports.colorOptions = async (req, res) => {
   try {
     const colorOptions = await Review.colorOptions();
@@ -33,43 +42,14 @@ exports.scoreOptions = async (req, res) => {
 };
 
 exports.index = async (req, res) => {
-  try {    
-    let [queryLocation, queryColor, queryScore, queryDifficulty] = [{}, {}, {}, {}];
-    if (req.query.location != '0') queryLocation = {location: req.query.location};
-    if (req.query.color != '0') queryColor = {color: req.query.color};    
-    if (req.query.score != 0) queryScore = {score: req.query.score};    
-    if (req.query.difficulty != '') queryDifficulty = {difficulty: req.query.difficulty};    
-
-    let reviews;
-    if (JSON.stringify(req.query, null, 2) == '{}') {
-      reviews = await Review
+  console.log("In controller, ", req.query);
+  try {        
+    const user = await getUser(req);
+    const reviews = await Review
       .find()
       .populate('user')
-      .sort({ updatedAt: 'desc' });
-    } else {
-      reviews = await Review
-      .find(queryLocation)
-      .find(queryColor)
-      .find(queryScore)
-      .find(queryDifficulty)
-      .populate('user')
-      .sort({ updatedAt: 'desc' });
-    }
+      .sort({updatedAt: 'desc'});
 
-    let user = {};
-    if (typeof (req.session.passport) == 'undefined') {
-      req.session.passport = {};
-    } else {      
-      const { user: email } = req.session.passport;
-      user = await User.findOne({ email: email });
-    }
-
-    // res.render(`${viewPath}/index`, {
-    //   pageTitle: 'Scores',
-    //   reviews: reviews,
-    //   user: user,
-    //   formData: req.query
-    // });
     res.status(200).json(reviews);
 
   } catch (error) {
@@ -100,7 +80,7 @@ exports.show = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  console.log("In controller, req.body:", req.body)
+  // console.log("In controller, req.body:", req.body)
   try {
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
