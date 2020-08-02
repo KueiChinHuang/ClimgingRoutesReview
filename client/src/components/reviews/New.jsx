@@ -8,7 +8,7 @@ import ReviewForm from './_ReviewForm';
 const New = function () {    
 
     const [inputs, setInputs] = useState({
-        location: 'Wall A',
+        location: 'Wall_A',
         color: 'Blue',
         score: 5,
         difficulty: '',

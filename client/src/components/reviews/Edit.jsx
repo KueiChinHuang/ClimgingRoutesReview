@@ -10,7 +10,7 @@ const Edit = function (props) {
     const id = props.location.state.id;    
 
     const [inputs, setInputs] = useState({
-        location: 'Wall A',
+        location: 'Wall_A',
         color: 'Blue',
         score: 5,
         difficulty: '',

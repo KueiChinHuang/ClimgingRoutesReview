@@ -48,13 +48,16 @@ exports.index = async (req, res) => {
     if (req.query.term !== '') {
       let t1 = req.query.term.split(' ');
       let t2 = "\"" + t1.join("\" \"") + "\"";
-      searchTerm = { $text: { $search: t2 } }
+      searchTerm = { "$text": { "$search": t2 } }
     } 
+    searchTerm = {"title": { "$regex" : "Wall_A", "$options" : "i"}}
+    console.log('searchTerm: ', searchTerm);
         
     const reviews = await Review
       .find(searchTerm)
       .populate('user')
       .sort({updatedAt: 'desc'});
+    console.log('reviews: ', reviews)
 
     res.status(200).json(reviews);
 

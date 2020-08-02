@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const possibleColors = ['Blue', 'Green', 'Red', 'Black'];
-const possibleLocations = ['Wall A', 'Wall B', 'Wall C', 'Wall D'];
+const possibleLocations = ['Wall_A', 'Wall_B', 'Wall_C', 'Wall_D'];
 const possibleScores = [0, 1, 2, 3, 4, 5];
 
 const ReviewSchema = new mongoose.Schema({
@@ -19,7 +19,7 @@ const ReviewSchema = new mongoose.Schema({
   location: {
     type: String,    
     enum:  possibleLocations,
-    default: 'Wall A',
+    default: 'Wall_A',
     require: true
   },
   score: {
@@ -51,7 +51,7 @@ ReviewSchema.virtual('title')
     return `${this.location} ${this.color} ${this.difficulty}`
   })
 
-ReviewSchema.index({'title': 'text'});
+ReviewSchema.index({'$**': 'text'});
 
 ReviewSchema.virtual('synopsis')
   .get(function () {
