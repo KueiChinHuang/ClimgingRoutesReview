@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import SearchForm from './_SearchForm';
 
 const Index = function ({ user }) {
-    const [inputs, setInputs] = useState([]);
+    const [searchTerms, setSearchTerms] = useState('');
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         (async () => {
             await getReviews();
         })();
-    }, []);
+    }, [searchTerms]);
 
     const getReviews = async () => {
         const reviewsResp = await Axios.get('/api/reviews', {
             params: {
-              term: 'Wall A'
+              term: searchTerms
             }
           });
           
@@ -56,9 +57,8 @@ const Index = function ({ user }) {
         <Container className="my-5">
             <header className="text-white">
                 <h1>Climbing Route Reviews</h1>
+                <SearchForm setSearchTerms={setSearchTerms}/>
             </header>
-
-
 
             <hr />
 

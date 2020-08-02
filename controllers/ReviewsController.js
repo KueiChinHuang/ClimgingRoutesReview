@@ -44,10 +44,13 @@ exports.scoreOptions = async (req, res) => {
 exports.index = async (req, res) => {
   console.log("In controller, ", req.query);
   try {        
-    const searchTerm = req.query.term ? req.query.term : null;
+    const searchTerm = (req.query.term !== '') 
+                        ? {title: {"$regex": req.query.term, "$options": "i" }}
+                        : null;
+    console.log("In controller, ", searchTerm);
     const user = await getUser(req);
     const reviews = await Review
-      .find({title: {"$regex": searchTerm, "$options": "i" }})
+      .find(searchTerm)
       .populate('user')
       .sort({updatedAt: 'desc'});
     // console.log(reviews);
