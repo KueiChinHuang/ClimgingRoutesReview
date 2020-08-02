@@ -1,4 +1,3 @@
-const viewPath = 'reviews';
 const User = require("../models/User");
 const Review = require("../models/Review");
 
@@ -42,18 +41,20 @@ exports.scoreOptions = async (req, res) => {
 };
 
 exports.index = async (req, res) => {
-  console.log("In controller, ", req.query);
-  try {        
-    const searchTerm = (req.query.term !== '') 
-                        ? { $text: { $search: req.query.term } }
-                        : null;
-    console.log("In controller, ", searchTerm);
+  try { 
     const user = await getUser(req);
+
+    let searchTerm = null;
+    if (req.query.term !== '') {
+      let t1 = req.query.term.split(' ');
+      let t2 = "\"" + t1.join("\" \"") + "\"";
+      searchTerm = { $text: { $search: t2 } }
+    } 
+        
     const reviews = await Review
       .find(searchTerm)
       .populate('user')
       .sort({updatedAt: 'desc'});
-    // console.log(reviews);
 
     res.status(200).json(reviews);
 

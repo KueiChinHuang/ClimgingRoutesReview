@@ -1,18 +1,3 @@
-// INSTRUCTIONS
-/*
-  Create a new resource model that uses the User
-  as an associative collection (examples):
-  - User -> Books
-  - User -> Reservation
-
-  Your model must contain at least three attributes
-  other than the associated user and the timestamps.
-
-  Your model must have at least one helpful virtual
-  or query function. For example, you could have a
-  book's details output in an easy format: book.format()
-*/
-
 const mongoose = require('mongoose');
 
 const possibleColors = ['Blue', 'Green', 'Red', 'Black'];
@@ -66,7 +51,7 @@ ReviewSchema.virtual('title')
     return `${this.location} ${this.color} ${this.difficulty}`
   })
 
-ReviewSchema.index({'$**': 'text'});
+ReviewSchema.index({'title': 'text'});
 
 ReviewSchema.virtual('synopsis')
   .get(function () {

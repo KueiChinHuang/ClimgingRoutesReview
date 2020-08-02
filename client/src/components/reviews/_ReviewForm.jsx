@@ -1,6 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Form, Col } from 'react-bootstrap';
-import Axios from 'axios';
 import OptionsForm from './_OptionsForm';
 
 const ReviewForm = function ({ inputs, setInputs }) {

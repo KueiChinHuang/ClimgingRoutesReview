@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Col, Button } from 'react-bootstrap';
-import Axios from 'axios';
+import React from 'react';
+import { Form } from 'react-bootstrap';
 
 const SearchForm = function ({setSearchTerms}) {
 
