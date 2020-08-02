@@ -66,6 +66,8 @@ ReviewSchema.virtual('title')
     return `${this.location} ${this.color} ${this.difficulty}`
   })
 
+ReviewSchema.index({'$**': 'text'});
+
 ReviewSchema.virtual('synopsis')
   .get(function () {
     const post = this.description;

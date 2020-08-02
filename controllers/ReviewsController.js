@@ -45,7 +45,7 @@ exports.index = async (req, res) => {
   console.log("In controller, ", req.query);
   try {        
     const searchTerm = (req.query.term !== '') 
-                        ? {title: {"$regex": req.query.term, "$options": "i" }}
+                        ? { $text: { $search: req.query.term } }
                         : null;
     console.log("In controller, ", searchTerm);
     const user = await getUser(req);
