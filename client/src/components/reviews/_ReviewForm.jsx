@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Form, Col } from 'react-bootstrap';
 import Axios from 'axios';
 import OptionsForm from './_OptionsForm';
 
-const ReviewForm = function ({ handleSubmit, inputs, setInputs }) {
+const ReviewForm = function ({ inputs, setInputs }) {
 
     const handleInputChange = async event => {
         event.persist();
@@ -18,8 +18,7 @@ const ReviewForm = function ({ handleSubmit, inputs, setInputs }) {
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
-            
+        <Fragment>
             <Form.Row className="py-2">
                 <OptionsForm handleInputChange={handleInputChange} inputs={inputs} setInputs={setInputs} />
             </Form.Row>
@@ -34,13 +33,7 @@ const ReviewForm = function ({ handleSubmit, inputs, setInputs }) {
                         value={inputs.description} />
                 </Col>
             </Form.Row>
-
-            <Form.Row className="py-4">
-                <Col>
-                    <button type="submit" className="btn btn-primary">Update</button>
-                </Col>
-            </Form.Row>
-        </Form>
+        </Fragment>
     );
 };
 

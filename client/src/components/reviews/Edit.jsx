@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Form, Col } from 'react-bootstrap';
 import Axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -53,9 +53,15 @@ const Edit = function (props) {
             </header>
 
             <hr/>
+            <Form onSubmit={handleSubmit}>
+                <ReviewForm inputs={inputs} setInputs={setInputs}/>
 
-            <ReviewForm handleSubmit={handleSubmit} inputs={inputs} setInputs={setInputs}/>
-
+                <Form.Row className="py-4">
+                    <Col>
+                        <button type="submit" className="btn btn-primary">Update</button>
+                    </Col>
+                </Form.Row>
+            </Form>
         </Container>
     );
 
