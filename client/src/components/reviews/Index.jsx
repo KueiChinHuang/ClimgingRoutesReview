@@ -17,10 +17,10 @@ const Index = function ({ user }) {
     const getReviews = async () => {
         const reviewsResp = await Axios.get('/api/reviews', {
             params: {
-              foo: 'bar'
+              term: 'Wall A'
             }
           });
-        console.log(reviewsResp)
+          
         if (reviewsResp.status === 200) setReviews(reviewsResp.data);
     };
 
