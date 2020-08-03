@@ -32,7 +32,7 @@ const Edit = function (props) {
         try {            
             const resp = await Axios.post('/api/reviews/update', inputs);
             if (resp.status === 200) {
-                toast("The new review was updated successfully.", {
+                toast("Your review was updated successfully.", {
                     type: toast.TYPE.SUCCESS
                 });
                 setRedirect(true);

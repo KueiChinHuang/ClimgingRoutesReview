@@ -23,7 +23,7 @@ const New = function () {
         try {            
             const resp = await Axios.post('/api/reviews', inputs);
             if (resp.status === 200) {
-                toast("The new review was created successfully.", {
+                toast("Your review was created successfully.", {
                     type: toast.TYPE.SUCCESS
                 });
                 setRedirect(true);
