@@ -35,9 +35,6 @@ const Login = ({setUser}) => {
                 type: toast.TYPE.ERROR
             });
         }
-
-
-
     };
 
     const handleInputChange = event => {

@@ -50,13 +50,13 @@ exports.index = async (req, res) => {
       let t2 = "\"" + t1.join("\" \"") + "\"";
       searchTerm = { "$text": { "$search": t2 } }
     } 
-    console.log('searchTerm: ', searchTerm);
+    // console.log('searchTerm: ', searchTerm);
         
     const reviews = await Review
       .find(searchTerm)
       .populate('user')
       .sort({updatedAt: 'desc'});
-    console.log('reviews: ', reviews)
+    // console.log('reviews: ', reviews);
 
     res.status(200).json(reviews);
 

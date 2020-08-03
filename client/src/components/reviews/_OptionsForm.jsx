@@ -29,7 +29,6 @@ const OptionsForm = function ({ handleInputChange, inputs, setInputs }) {
 
     const getScoreOptions = async () => {
         const scoreOptionsResp = await Axios.get('/api/reviews/scoreOptions');
-        console.log(scoreOptionsResp);
         if (scoreOptionsResp.status === 200) setScoreOptions(scoreOptionsResp.data);
     };
 
