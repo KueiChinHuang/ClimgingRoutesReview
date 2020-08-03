@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, InputGroup, FormControl } from 'react-bootstrap';
 
 const SearchForm = function ({searchTerms, setSearchTerms}) {
 
@@ -17,10 +17,14 @@ const SearchForm = function ({searchTerms, setSearchTerms}) {
     return (
         <Form inline onSubmit={e => { e.preventDefault(); }}>
             <Form.Group>
-                <Form.Control className="mb-2 mr-sm-2" placeholder="Search Title ..." onChange={handleInputChange} value={searchTerms}>
-                </Form.Control>
+                <InputGroup className="">
+                    <InputGroup.Prepend >
+                    <InputGroup.Text className=""><i class="fa fa-search"></i></InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl className="mr-sm-2" placeholder="Search ..." onChange={handleInputChange} value={searchTerms}/>
+                </InputGroup>
             </Form.Group>
-            <Button className="mb-2" type="reset" onClick={handleClear}>
+            <Button className="" type="reset" onClick={handleClear}>
                 Clear
             </Button>
         </Form>
