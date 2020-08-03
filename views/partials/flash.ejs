@@ -1,9 +1,0 @@
-<% if (flash) { %>
-  <% for (let [status, messages] of Object.entries(flash)) { %>
-    <div class="alert alert-<%= status === 'error' ? 'danger' : status %>">
-      <% for (let message of messages) { %>
-        <%= message %>
-      <% } %>
-    </div>
-  <% } %>
-<% } %>
