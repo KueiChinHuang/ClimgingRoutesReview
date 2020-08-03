@@ -83,7 +83,7 @@ exports.show = async (req, res) => {
 
     res.status(200).json(review);
   } catch (error) {
-    res.status(400).json({message: "There was an error displaying this blog"});
+    res.status(400).json({message: "There was an error displaying this review"});
   }
 };
 
@@ -97,7 +97,7 @@ exports.create = async (req, res) => {
     res.status(200).json(review);
     
   } catch (error) {
-    res.status(400).json({message: "There was an error creating a new item in controller", error});
+    res.status(400).json({message: "There was an error creating a review", error});
   }
 };
 
@@ -113,12 +113,10 @@ exports.update = async (req, res) => {
     await Review.validate(attributes);
     await Review.findByIdAndUpdate(attributes.id, attributes);
 
-    req.flash('success', 'Update successfully.');
-    res.redirect(`${req.body.id}`);
+    res.status(200).json({message: "Update successfully"});
 
   } catch (error) {
-    req.flash('danger', `Update failed. Error: ${error}`)
-    res.redirect(`${req.body.id}/edit`);
+    res.status(400).json({message: "There was an error updating the review"});
   }
 };
 
@@ -128,7 +126,7 @@ exports.delete = async (req, res) => {
     
     res.status(200).json({message: "Yay."});
   } catch (error) {
-    res.status(400).json({message: "There was an error deleting the blog"});
+    res.status(400).json({message: "There was an error deleting the review"});
   }
 };
 

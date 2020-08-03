@@ -40,18 +40,6 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-/*
-  Setup the asset pipeline, path, the static paths,
-  the views directory, and the view engine
-*/
-const path = require('path');
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use('/css', express.static('assets/css'));
-app.use('/images', express.static('assets/images'));
-app.use('/javascript', express.static('assets/javascript'));
 /*
   Setup the body parser
 */
@@ -65,6 +53,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 const routes = require('./routes.js');
 app.use('/api', routes);
 
+const path = require('path');
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
