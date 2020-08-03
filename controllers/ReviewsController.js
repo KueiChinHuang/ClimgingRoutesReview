@@ -50,7 +50,6 @@ exports.index = async (req, res) => {
       let t2 = "\"" + t1.join("\" \"") + "\"";
       searchTerm = { "$text": { "$search": t2 } }
     } 
-    searchTerm = {"title": { "$regex" : "Wall_A", "$options" : "i"}}
     console.log('searchTerm: ', searchTerm);
         
     const reviews = await Review
