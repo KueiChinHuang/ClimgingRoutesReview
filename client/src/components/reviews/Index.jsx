@@ -57,9 +57,9 @@ const Index = function ({ user }) {
         <Container className="my-5">
             <header className=" text-white clearfix">
                 <h1 className="float-left">Climbing Route Reviews</h1>
-                <span className="float-right my-2" >
+                <div className="float-right my-2" >
                     <SearchForm searchTerms={searchTerms} setSearchTerms={setSearchTerms}/>
-                </span>
+                </div>
                 
             </header>
 
