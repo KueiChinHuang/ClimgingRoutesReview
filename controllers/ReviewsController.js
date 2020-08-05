@@ -23,29 +23,28 @@ exports.reviewOptions = async (req, res) => {
 exports.index = async (req, res) => {
   try { 
     const user = await getUser(req);
-    // console.log("user: ", user);
 
+    // Set up search term
     let searchTerm = null;
     if (req.query.term !== '') {
       let t1 = req.query.term.split(' ');
       let t2 = "\"" + t1.join("\" \"") + "\"";
       searchTerm = { "$text": { "$search": t2 } }
     } 
-    // console.log('searchTerm: ', searchTerm);
-
+    
+    // Set up sort method
     let sortBy = {updatedAt: -1};
     if (req.query.sortBy !== '') {
       sortBy = {[req.query.sortBy]: -1}
     }
-    console.log('sortBy: ', sortBy);
-        
+    
+    // Get the reviews
     const reviews = await Review
       .find(searchTerm)
       .populate('user')
       .sort(sortBy);
       
-    reviews.forEach(r => console.log(r.user.firstName))
-    // console.log('reviews.user: ', reviews.user);
+    reviews.forEach(r => console.log(r.user.firstName));
 
     res.status(200).json(reviews);
 

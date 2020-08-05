@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Container, ButtonGroup, Button, ToggleButton } from 'react-bootstrap';
+import { Container, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import Axios from 'axios';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import SearchForm from './_SearchForm';
 
 const Index = function ({ user }) {
-    const [searchTerms, setSearchTerms] = useState('');
-    const [sortBy, setSortBy] = useState('');
-    const [reviews, setReviews] = useState([]);
+    // Set up useState
+    const [searchTerms, setSearchTerms] = useState(''); // for search terms
+    const [sortBy, setSortBy] = useState('');           // for sort method
+    const [reviews, setReviews] = useState([]);         // for reviews
 
+    // All the options for sort method
     const sortButton =[
         {name: 'Time', value: 'updatedAt'},
         {name: 'Score', value: 'score'},
@@ -17,12 +19,14 @@ const Index = function ({ user }) {
         {name: 'User', value: 'user.firstName'}
     ];
 
+    // Render the page when search term or sort method change
     useEffect(() => {
         (async () => {
             await getReviews();
         })();
     }, [searchTerms, sortBy]);
 
+    // To get all the reviews according to user's search term and sort method
     const getReviews = async () => {
         const reviewsResp = await Axios.get('/api/reviews', {
             params: {
@@ -34,12 +38,14 @@ const Index = function ({ user }) {
         if (reviewsResp.status === 200) setReviews(reviewsResp.data);
     };
 
+    // Handle sort method changes
     const handleSortChange = async event => {
         event.persist();
         setSortBy(event.target.value);
         // console.log(sortBy);
     };
 
+    // To delete a review
     const deleteReview = async review => {
         try {
             const resp = await Axios.post('/api/reviews/delete', {
@@ -54,6 +60,7 @@ const Index = function ({ user }) {
         }
     };
 
+    // Create star according to review's score
     const createStar = score => {
         let star = [];
 
@@ -70,9 +77,12 @@ const Index = function ({ user }) {
 
     return (
         <Container className="my-5">
+
+            {/* Header: title and search bar */}
             <header className="text-white clearfix">
                 <h1 className="float-left">Climbing Route Reviews</h1>
                 <div className="float-right my-2" >
+                    {/* Import component - SeearchForm */}
                     <SearchForm searchTerms={searchTerms} setSearchTerms={setSearchTerms}/>
                 </div>
                 
@@ -80,7 +90,7 @@ const Index = function ({ user }) {
 
             <hr />
 
-
+            {/* Buttons for sorting reviews */}
             <span className="m-3 text-white">Sort By:</span>
             <ButtonGroup toggle className="my-3">
                 {sortButton.map((sortBtn, idx) => (
@@ -98,10 +108,15 @@ const Index = function ({ user }) {
                 ))}
 
             </ButtonGroup>
+
+            {/* Display all the reviews */}
             <div className="row">
+                {/* Each card is a review */}
                 {reviews && reviews.map((review, i) => (
                     <div key={i} className="col-sm-4">
                         <div className="card mb-3">
+
+                            {/* Set up card header, including title and time */}
                             <div className="card-header clearfix">
                                 <div className="float-left">
                                     <h5 className="card-title my-0">
@@ -114,6 +129,7 @@ const Index = function ({ user }) {
                                 </div>
                             </div>
 
+                            {/* Set up card body, including contents and author */}
                             <div className="card-body">
                                 {createStar(review.score)}
                                 <p className="card-text">
@@ -125,6 +141,7 @@ const Index = function ({ user }) {
                                     ) : null}
                             </div>
 
+                            {/* Set up card footer for user who has logged in. Only show footer for their own post */}
                             {user && user.email === review.user.email ? (
                                 <div className="card-footer">
                                     <Link to={{
@@ -139,12 +156,12 @@ const Index = function ({ user }) {
                                     <button type="button" className="delete" onClick={() => deleteReview(review)}>
                                         <i className="fa fa-trash"></i>
                                     </button>
-                                </div>
-                                
+                                </div>                                
                             ) : null}
                         </div>
                     </div>
                 ))}
+
             </div>
         </Container>
     );
