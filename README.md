@@ -7,7 +7,7 @@ With this app, users can ...
 - Sort the reviews by time/score/difficulty/user
 - Search reviews using key words
 
-## Main techiniques in this project
+## Techiniques involved
 
 **Dadtabase**
 - Mongo DB
@@ -32,7 +32,7 @@ With this app, users can ...
 - [$regex](https://docs.mongodb.com/manual/reference/operator/query/regex/)
 
 **React**
-- [For Loops in React Render() — No You Didn’t!](https://blog.cloudboost.io/for-loops-in-react-render-no-you-didnt-6c9f4aa73778)
+- [For Loops in React Render() ](https://blog.cloudboost.io/for-loops-in-react-render-no-you-didnt-6c9f4aa73778)
 - [How to pass props to the route component in React router](https://learnwithparam.com/blog/how-to-pass-props-in-react-router/)
 
 **react-bootstrap**
@@ -41,3 +41,4 @@ With this app, users can ...
 
 **For future improvement**
 - [MongoDB Full and Partial Text Search](https://stackoverflow.com/questions/44833817/mongodb-full-and-partial-text-search)
+- [Sort by user.firstName](https://stackoverflow.com/questions/50310214/sort-not-working-at-all-mongoose/50310405)
