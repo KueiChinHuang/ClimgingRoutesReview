@@ -10,8 +10,11 @@ const Index = function ({ user }) {
     const [sortBy, setSortBy] = useState('');
     const [reviews, setReviews] = useState([]);
 
-    const sortBtn =[
-        {name: 'Time', value: 'updatedAt'}
+    const sortButton =[
+        {name: 'Time', value: 'updatedAt'},
+        {name: 'Score', value: 'score'},
+        {name: 'Difficulty', value: 'difficulty'},
+        {name: 'User', value: 'user.email'}
     ];
 
     useEffect(() => {
@@ -79,23 +82,20 @@ const Index = function ({ user }) {
 
 
             <span className="m-3 text-white">Sort By:</span>
-            {/* <ButtonGroup className="my-3"> */}
-            <ButtonGroup toggle className="mb-2">
-                <Button value="updatedAt" variant="outline-light" onClick={handleSortChange}>Time</Button>
-                <Button value="score" variant="outline-light" onClick={handleSortChange}>Score</Button>
-                <Button value="difficulty" variant="outline-light" onClick={handleSortChange}>Difficulty</Button>
-                <Button value="user.email" variant="outline-light" onClick={handleSortChange}>User</Button>
-
-                <ToggleButton
-                    type="radio"
-                    variant="outline-light"
-                    name="radio"
-                    value="updatedAt"
-                    checked={sortBy === "updatedAt"}
-                    onChange={handleSortChange}
-                >
-                    Time
-              </ToggleButton>
+            <ButtonGroup toggle className="my-3">
+                {sortButton.map((sortBtn, idx) => (
+                    <ToggleButton
+                        keu={idx}
+                        type="radio"
+                        variant="outline-light"
+                        name="radio"
+                        value={sortBtn.value}
+                        checked={sortBy === sortBtn.value}
+                        onChange={handleSortChange}
+                    >
+                        {sortBtn.name}
+                    </ToggleButton>
+                ))}
 
             </ButtonGroup>
             <div className="row">
