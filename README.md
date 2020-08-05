@@ -9,20 +9,20 @@ With this app, users can ...
 
 ## Main techiniques in this project
 
-Dadtabase
+**Dadtabase**
 - Mongo DB
 
-Back-end
+**Back-end**
 - Node.js
 - Express.js
 
-Front-end
+**Front-end**
 - React.js
 
 
 ## Resources I've used when building this project
 
-MongoDB
+**MongoDB**
 - [Mongoose Virtuals](https://mongoosejs.com/docs/tutorials/virtuals.html)
 - [Best way to perform a full text search in MongoDB and Mongoose](https://stackoverflow.com/questions/28775051/best-way-to-perform-a-full-text-search-in-mongodb-and-mongoose)
 - [MongoDB Text Search AND multiple search words](https://stackoverflow.com/questions/16902674/mongodb-text-search-and-multiple-search-words)
@@ -31,13 +31,13 @@ MongoDB
 - [How to get all the values that contains part of a string using mongoose find?](https://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find/26814550)
 - [$regex](https://docs.mongodb.com/manual/reference/operator/query/regex/)
 
-React
+**React**
 - [For Loops in React Render() — No You Didn’t!](https://blog.cloudboost.io/for-loops-in-react-render-no-you-didnt-6c9f4aa73778)
 - [How to pass props to the route component in React router](https://learnwithparam.com/blog/how-to-pass-props-in-react-router/)
 
-react-bootstrap
+**react-bootstrap**
 - [Collapse](https://react-bootstrap.github.io/utilities/transitions/#collapse)
 - [Spacing](https://getbootstrap.com/docs/4.5/utilities/spacing/)
 
-For future improvement
+**For future improvement**
 - [MongoDB Full and Partial Text Search](https://stackoverflow.com/questions/44833817/mongodb-full-and-partial-text-search)
