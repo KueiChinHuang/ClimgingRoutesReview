@@ -43,6 +43,7 @@ exports.scoreOptions = async (req, res) => {
 exports.index = async (req, res) => {
   try { 
     const user = await getUser(req);
+    console.log("user: ", user);
 
     let searchTerm = null;
     if (req.query.term !== '') {
@@ -53,20 +54,8 @@ exports.index = async (req, res) => {
     // console.log('searchTerm: ', searchTerm);
 
     let sortBy = {};
-    let prevSort = "";
-
     if (req.query.sortBy !== '') {
-
-      switch (req.query.sortBy) {
-        case "score":
-          sortBy = {score: 'desc'}
-          break;
-        case "difficulty":
-          sortBy = {difficulty: 'desc'}
-          break;
-        default:
-          sortBy = {updatedAt: 'desc'}          
-      }
+      sortBy = {[req.query.sortBy]: 'desc'}
     }
         
     const reviews = await Review

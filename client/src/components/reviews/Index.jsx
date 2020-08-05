@@ -79,6 +79,7 @@ const Index = function ({ user }) {
                 <Button value="time" variant="outline-light" onClick={handleSortChange}>Time</Button>
                 <Button value="score" variant="outline-light" onClick={handleSortChange}>Score</Button>
                 <Button value="difficulty" variant="outline-light" onClick={handleSortChange}>Difficulty</Button>
+                <Button value="user.email" variant="outline-light" onClick={handleSortChange}>User</Button>
             </ButtonGroup>
             <div className="row">
                 {reviews && reviews.map((review, i) => (
