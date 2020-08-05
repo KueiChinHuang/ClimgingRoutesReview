@@ -16,7 +16,7 @@ const Index = function ({ user }) {
         {name: 'Time', value: 'updatedAt'},
         {name: 'Score', value: 'score'},
         {name: 'Difficulty', value: 'difficulty'},
-        {name: 'User', value: 'user.firstName'}
+        {name: 'User', value: 'user'}
     ];
 
     // Render the page when search term or sort method change
