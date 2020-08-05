@@ -85,7 +85,7 @@ const Index = function ({ user }) {
             <ButtonGroup toggle className="my-3">
                 {sortButton.map((sortBtn, idx) => (
                     <ToggleButton
-                        keu={idx}
+                        key={idx}
                         type="radio"
                         variant="outline-light"
                         name="radio"
