@@ -36,7 +36,7 @@ With this app, users can ...
 - [How to pass props to the route component in React router](https://learnwithparam.com/blog/how-to-pass-props-in-react-router/)
 - [Learn useState In 15 Minutes - React Hooks Explained](https://youtu.be/O6P86uwfdR0)
 - [Learn useEffect In 13 Minutes](https://youtu.be/0ZJgIjIuY7U)
-- [My JavaScript playlist](https://www.youtube.com/playlist?list=PLGJCm9G_CnBCHhwjuOGF1DFecvekuLzLF)
+- [My Youtube JavaScript playlist](https://www.youtube.com/playlist?list=PLGJCm9G_CnBCHhwjuOGF1DFecvekuLzLF)
 
 **react-bootstrap**
 - [Collapse](https://react-bootstrap.github.io/utilities/transitions/#collapse)
