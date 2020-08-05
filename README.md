@@ -20,7 +20,7 @@ With this app, users can ...
 - React.js
 
 
-## Resources I've used when building this project
+## Some extra resources I've used when building this project
 
 **MongoDB**
 - [Mongoose Virtuals](https://mongoosejs.com/docs/tutorials/virtuals.html)
@@ -34,6 +34,9 @@ With this app, users can ...
 **React**
 - [For Loops in React Render() ](https://blog.cloudboost.io/for-loops-in-react-render-no-you-didnt-6c9f4aa73778)
 - [How to pass props to the route component in React router](https://learnwithparam.com/blog/how-to-pass-props-in-react-router/)
+- [Learn useState In 15 Minutes - React Hooks Explained](https://youtu.be/O6P86uwfdR0)
+- [Learn useEffect In 13 Minutes](https://youtu.be/0ZJgIjIuY7U)
+- [My JavaScript playlist](https://www.youtube.com/playlist?list=PLGJCm9G_CnBCHhwjuOGF1DFecvekuLzLF)
 
 **react-bootstrap**
 - [Collapse](https://react-bootstrap.github.io/utilities/transitions/#collapse)
