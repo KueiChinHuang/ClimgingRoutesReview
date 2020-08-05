@@ -5,17 +5,24 @@ import Axios from 'axios';
 const ReviewForm = function ({ inputs, setInputs }) {
 
     // Set up options for color, location, and score
+    const [reviewOptions, setReviewOptions] = useState([]);
     const [colorOptions, setColorOptions] = useState([]);
     const [locationOptions, setLocationOptions] = useState([]);
     const [scoreOptions, setScoreOptions] = useState([]);
 
     useEffect(() => {
         (async () => {
+            await getReviewOptions();
             await getColorOptions();
             await getLocationOptions();
             await getScoreOptions();
         })();
     }, []);
+
+    const getReviewOptions = async () => {
+        const reviewOptionsResp = await Axios.get('/api/reviews/reviewOptions');
+        if (reviewOptionsResp.status === 200) setReviewOptions(reviewOptionsResp.data);
+    };
 
     const getColorOptions = async () => {
         const colorOptionsResp = await Axios.get('/api/reviews/colorOptions');
@@ -69,7 +76,7 @@ const ReviewForm = function ({ inputs, setInputs }) {
                     onChange={handleInputChange}
                     value={inputs.color}
                 >
-                    {colorOptions.map((opt, i) => (
+                    {reviewOptions.colorOptions && reviewOptions.colorOptions.map((opt, i) => (
                         <option key={i} value={opt}>{opt}</option>
                     ))}
                 </Form.Control>

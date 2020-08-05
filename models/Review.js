@@ -46,6 +46,14 @@ ReviewSchema.statics.colorOptions = () => possibleColors;
 ReviewSchema.statics.locationOptions = () => possibleLocations;
 ReviewSchema.statics.scoreOptions = () => possibleScores;
 
+ReviewSchema.statics.reviewOptions = function() {
+  return {
+    colorOptions: possibleColors,
+    locationOptions: possibleLocations,
+    scoreOptions: possibleScores
+  }
+}
+
 ReviewSchema.virtual('title')
   .get(function () {
     return `${this.location} ${this.color} ${this.difficulty}`

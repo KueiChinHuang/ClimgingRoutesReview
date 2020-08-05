@@ -10,6 +10,16 @@ const getUser = async req => {
   return user;
 }
 
+exports.reviewOptions = async (req, res) => {
+  try {
+    const reviewOptions = await Review.reviewOptions();
+    res.status(200).json(reviewOptions);    
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({status: 'failed', message: `Couldn't get the color options.`, error});
+  }
+};
+
 exports.colorOptions = async (req, res) => {
   try {
     const colorOptions = await Review.colorOptions();
