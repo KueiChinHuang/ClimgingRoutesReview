@@ -42,6 +42,10 @@ With this app, users can ...
 - [Collapse](https://react-bootstrap.github.io/utilities/transitions/#collapse)
 - [Spacing](https://getbootstrap.com/docs/4.5/utilities/spacing/)
 
+**Git**
+- [How to Undo the Last Commit](https://code.likeagirl.io/how-to-undo-the-last-commit-393e7db2840b#:~:text=If%20you%20want%20to%20test,which%20undid%20your%20previous%20commit.)
+- [Numerous undo possibilities in Git](https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/)
+
 **For future improvement**
 - [MongoDB Full and Partial Text Search](https://stackoverflow.com/questions/44833817/mongodb-full-and-partial-text-search)
 - [Sort by user.firstName](https://stackoverflow.com/questions/50310214/sort-not-working-at-all-mongoose/50310405)
