@@ -1,32 +1,37 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
 
 function Nav({ user }) {
 
+    const [open, setOpen] = useState(false);
+
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <Navbar bg="light" expand="lg">
             <Link className="navbar-brand" to="/">Climbing Routes Review</Link>
             
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
+            <Navbar.Toggle 
+                aria-controls="navbarSupportedContent" 
+                onClick={() => setOpen(!open)} 
+                aria-expanded={open}
+            />
 
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <Navbar.Collapse in={open} id="navbarSupportedContent"> 
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/">Home</Link>
+                        <Link className="nav-link" onClick={() => setOpen(!open)} to="/" >Home</Link>
                     </li>
 
                     <li className="nav-item dropdown">
                         <a href="" className="nav-link dropdown-toggle" id="reviewsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reviews</a>
 
                         <div className="dropdown-menu" aria-labelledby="reviewsDropdown">
-                            <Link to="/reviews" className="dropdown-item">Reviews</Link>
+                            <Link to="/reviews" className="dropdown-item" onClick={() => setOpen(!open)}>Reviews</Link>
 
                             {user ? (
                                 <Fragment>
                                     <div className="dropdown-divider"></div>
-                                    <Link to="/reviews/new" className="dropdown-item">New Review</Link>
+                                    <Link to="/reviews/new" className="dropdown-item" onClick={() => setOpen(!open)}>New Review</Link>
                                 </Fragment>
                             ) : null}
                         </div>
@@ -37,7 +42,7 @@ function Nav({ user }) {
                 <ul className="navbar-nav">
                     {user ? (
                         <li className="nav-item">
-                            <Link to="/logout" className="nav-link">
+                            <Link to="/logout" className="nav-link" onClick={() => setOpen(!open)}>
                                 <i className="fa fa-sign-out"></i>
                                 Logout
                             </Link>
@@ -45,14 +50,14 @@ function Nav({ user }) {
                     ) : (
                         <Fragment>
                             <li className="nav-item">
-                                <Link to="/register" className="nav-link">
+                                <Link to="/register" className="nav-link" onClick={() => setOpen(!open)}>
                                     <i className="fa fa-user-plus"></i>
                                 Register
                             </Link>
                             </li>
 
                             <li className="nav-item">
-                                <Link to="/login" className="nav-link">
+                                <Link to="/login" className="nav-link" onClick={() => setOpen(!open)}>
                                     <i className="fa fa-sign-in"></i>
                                 Login
                             </Link>
@@ -61,8 +66,8 @@ function Nav({ user }) {
                     )}
 
                 </ul>
-            </div>
-        </nav>
+            </Navbar.Collapse>
+        </Navbar>
     );
 };
 
