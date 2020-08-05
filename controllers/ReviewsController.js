@@ -51,11 +51,13 @@ exports.index = async (req, res) => {
       searchTerm = { "$text": { "$search": t2 } }
     } 
     // console.log('searchTerm: ', searchTerm);
+
+    let sortBy = {updatedAt: 'desc'}
         
     const reviews = await Review
       .find(searchTerm)
       .populate('user')
-      .sort({updatedAt: 'desc'});
+      .sort(sortBy);
     // console.log('reviews: ', reviews);
 
     res.status(200).json(reviews);
@@ -72,8 +74,7 @@ exports.show = async (req, res) => {
       .populate('user');
 
     // get current user info
-    const { user: email } = req.session.passport;
-    const user = await User.findOne({ email: email });
+    const user = await getUser(req);
 
     // res.render(`${viewPath}/show`, {
     //   pageTitle: review.name,
@@ -90,8 +91,7 @@ exports.show = async (req, res) => {
 exports.create = async (req, res) => {
   // console.log("In controller, req.body:", req.body)
   try {
-    const { user: email } = req.session.passport;
-    const user = await User.findOne({ email: email });
+    const user = await getUser(req);
     const review = await Review.create({ user: user._id, ...req.body });
     
     res.status(200).json(review);
@@ -103,8 +103,7 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { user: email } = req.session.passport;
-    const user = await User.findOne({ email: email });
+    const user = await getUser(req);
 
     const review = await Review.findById(req.body.id);
     if (!review) throw 'The score can not be found.'

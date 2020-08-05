@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, ButtonGroup, Button } from 'react-bootstrap';
 import Axios from 'axios';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -7,22 +7,30 @@ import SearchForm from './_SearchForm';
 
 const Index = function ({ user }) {
     const [searchTerms, setSearchTerms] = useState('');
+    const [sortBy, setSortBy] = useState('');
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         (async () => {
             await getReviews();
         })();
-    }, [searchTerms]);
+    }, [searchTerms,]);
 
     const getReviews = async () => {
         const reviewsResp = await Axios.get('/api/reviews', {
             params: {
-              term: searchTerms
+              term: searchTerms,
+              sortBy
             }
           });
           
         if (reviewsResp.status === 200) setReviews(reviewsResp.data);
+    };
+
+    const handleSortChange = async event => {
+        event.persist();
+        setSortBy(event.target.value);
+        console.log(sortBy);
     };
 
     const deleteReview = async review => {
@@ -55,7 +63,7 @@ const Index = function ({ user }) {
 
     return (
         <Container className="my-5">
-            <header className=" text-white clearfix">
+            <header className="text-white clearfix">
                 <h1 className="float-left">Climbing Route Reviews</h1>
                 <div className="float-right my-2" >
                     <SearchForm searchTerms={searchTerms} setSearchTerms={setSearchTerms}/>
@@ -65,6 +73,13 @@ const Index = function ({ user }) {
 
             <hr />
 
+
+            <span className="m-3 text-white">Sort By:</span>
+            <ButtonGroup className="my-3">
+                <Button value="time" variant="outline-light" onClick={handleSortChange}>Time</Button>
+                <Button value="score" variant="outline-light" onClick={handleSortChange}>Score</Button>
+                <Button value="difficulty" variant="outline-light" onClick={handleSortChange}>Difficulty</Button>
+            </ButtonGroup>
             <div className="row">
                 {reviews && reviews.map((review, i) => (
                     <div key={i} className="col-sm-4">
