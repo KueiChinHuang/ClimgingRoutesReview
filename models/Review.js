@@ -42,10 +42,6 @@ const ReviewSchema = new mongoose.Schema({
   }
 });
 
-ReviewSchema.statics.colorOptions = () => possibleColors;
-ReviewSchema.statics.locationOptions = () => possibleLocations;
-ReviewSchema.statics.scoreOptions = () => possibleScores;
-
 ReviewSchema.statics.reviewOptions = function() {
   return {
     colorOptions: possibleColors,

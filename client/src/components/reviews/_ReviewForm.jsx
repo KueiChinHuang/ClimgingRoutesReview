@@ -6,37 +6,16 @@ const ReviewForm = function ({ inputs, setInputs }) {
 
     // Set up options for color, location, and score
     const [reviewOptions, setReviewOptions] = useState([]);
-    const [colorOptions, setColorOptions] = useState([]);
-    const [locationOptions, setLocationOptions] = useState([]);
-    const [scoreOptions, setScoreOptions] = useState([]);
 
     useEffect(() => {
         (async () => {
             await getReviewOptions();
-            await getColorOptions();
-            await getLocationOptions();
-            await getScoreOptions();
         })();
     }, []);
 
     const getReviewOptions = async () => {
         const reviewOptionsResp = await Axios.get('/api/reviews/reviewOptions');
         if (reviewOptionsResp.status === 200) setReviewOptions(reviewOptionsResp.data);
-    };
-
-    const getColorOptions = async () => {
-        const colorOptionsResp = await Axios.get('/api/reviews/colorOptions');
-        if (colorOptionsResp.status === 200) setColorOptions(colorOptionsResp.data);
-    };
-
-    const getLocationOptions = async () => {
-        const locationOptionsResp = await Axios.get('/api/reviews/locationOptions');
-        if (locationOptionsResp.status === 200) setLocationOptions(locationOptionsResp.data);
-    };
-
-    const getScoreOptions = async () => {
-        const scoreOptionsResp = await Axios.get('/api/reviews/scoreOptions');
-        if (scoreOptionsResp.status === 200) setScoreOptions(scoreOptionsResp.data);
     };
 
 
@@ -63,7 +42,7 @@ const ReviewForm = function ({ inputs, setInputs }) {
                     onChange={handleInputChange}
                     value={inputs.location}
                 >
-                    {locationOptions.map((opt, i) => (
+                    {reviewOptions.locationOptions && reviewOptions.locationOptions.map((opt, i) => (
                         <option key={i} value={opt}>{opt}</option>
                     ))}
                 </Form.Control>
@@ -89,7 +68,7 @@ const ReviewForm = function ({ inputs, setInputs }) {
                     onChange={handleInputChange}
                     value={inputs.score}
                 >
-                    {scoreOptions.map((opt, i) => (
+                    {reviewOptions.scoreOptions && reviewOptions.scoreOptions.map((opt, i) => (
                         <option key={i} value={opt}>{opt}</option>
                     ))}
                 </Form.Control>
