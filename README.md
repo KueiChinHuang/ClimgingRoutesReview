@@ -2,7 +2,11 @@
 > This is a web application built using Node.js and React.js.
 
 ## Introduction
-This app allow users to ...
+<p>
+This is an app for a rock-climbing gym. Climbers usually have some thoughts regarding the routes they've climbed. This app allow users to share their thoughts with other climbers, and also the gym and rock setters can improve the routes accordingly.
+</p>
+
+With this app, users can ...
 - Log in and log out
 - Create/Edit/Delete reviews
 - Sort the reviews by time/score/difficulty/user
