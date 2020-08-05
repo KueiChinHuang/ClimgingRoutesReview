@@ -52,11 +52,21 @@ exports.index = async (req, res) => {
     } 
     // console.log('searchTerm: ', searchTerm);
 
-    let sortBy = {updatedAt: 'desc'}
+    let sortBy = {};
+    let prevSort = "";
+
     if (req.query.sortBy !== '') {
-      
-      console.log("in controller, req.query:", req.query);
-      
+
+      switch (req.query.sortBy) {
+        case "score":
+          sortBy = {score: 'desc'}
+          break;
+        case "difficulty":
+          sortBy = {difficulty: 'desc'}
+          break;
+        default:
+          sortBy = {updatedAt: 'desc'}          
+      }
     }
         
     const reviews = await Review
