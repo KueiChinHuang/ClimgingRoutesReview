@@ -45,6 +45,7 @@ With this app, users can ...
 **Git**
 - [How to Undo the Last Commit](https://code.likeagirl.io/how-to-undo-the-last-commit-393e7db2840b#:~:text=If%20you%20want%20to%20test,which%20undid%20your%20previous%20commit.)
 - [Numerous undo possibilities in Git](https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/)
+- [git rebase](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase#:~:text=Rebase%20is%20one%20of%20two,has%20powerful%20history%20rewriting%20features.)
 
 **For future improvement**
 - [MongoDB Full and Partial Text Search](https://stackoverflow.com/questions/44833817/mongodb-full-and-partial-text-search)
