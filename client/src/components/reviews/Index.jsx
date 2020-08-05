@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, ButtonGroup, Button } from 'react-bootstrap';
+import { Container, ButtonGroup, Button, ToggleButton } from 'react-bootstrap';
 import Axios from 'axios';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,10 @@ const Index = function ({ user }) {
     const [searchTerms, setSearchTerms] = useState('');
     const [sortBy, setSortBy] = useState('');
     const [reviews, setReviews] = useState([]);
+
+    const sortBtn =[
+        {name: 'Time', value: 'updatedAt'}
+    ];
 
     useEffect(() => {
         (async () => {
@@ -75,11 +79,24 @@ const Index = function ({ user }) {
 
 
             <span className="m-3 text-white">Sort By:</span>
-            <ButtonGroup className="my-3">
+            {/* <ButtonGroup className="my-3"> */}
+            <ButtonGroup toggle className="mb-2">
                 <Button value="updatedAt" variant="outline-light" onClick={handleSortChange}>Time</Button>
                 <Button value="score" variant="outline-light" onClick={handleSortChange}>Score</Button>
                 <Button value="difficulty" variant="outline-light" onClick={handleSortChange}>Difficulty</Button>
                 <Button value="user.email" variant="outline-light" onClick={handleSortChange}>User</Button>
+
+                <ToggleButton
+                    type="radio"
+                    variant="outline-light"
+                    name="radio"
+                    value="updatedAt"
+                    checked={sortBy === "updatedAt"}
+                    onChange={handleSortChange}
+                >
+                    Time
+              </ToggleButton>
+
             </ButtonGroup>
             <div className="row">
                 {reviews && reviews.map((review, i) => (
