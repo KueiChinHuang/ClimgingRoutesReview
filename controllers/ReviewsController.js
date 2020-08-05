@@ -23,7 +23,7 @@ exports.reviewOptions = async (req, res) => {
 exports.index = async (req, res) => {
   try { 
     const user = await getUser(req);
-    console.log("user: ", user);
+    // console.log("user: ", user);
 
     let searchTerm = null;
     if (req.query.term !== '') {
@@ -33,7 +33,7 @@ exports.index = async (req, res) => {
     } 
     // console.log('searchTerm: ', searchTerm);
 
-    let sortBy = {};
+    let sortBy = {updatedAt: 'desc'};
     if (req.query.sortBy !== '') {
       sortBy = {[req.query.sortBy]: 'desc'}
     }

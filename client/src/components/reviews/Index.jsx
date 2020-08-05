@@ -76,7 +76,7 @@ const Index = function ({ user }) {
 
             <span className="m-3 text-white">Sort By:</span>
             <ButtonGroup className="my-3">
-                <Button value="time" variant="outline-light" onClick={handleSortChange}>Time</Button>
+                <Button value="updatedAt" variant="outline-light" onClick={handleSortChange}>Time</Button>
                 <Button value="score" variant="outline-light" onClick={handleSortChange}>Score</Button>
                 <Button value="difficulty" variant="outline-light" onClick={handleSortChange}>Difficulty</Button>
                 <Button value="user.email" variant="outline-light" onClick={handleSortChange}>User</Button>
