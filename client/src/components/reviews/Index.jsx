@@ -14,7 +14,7 @@ const Index = function ({ user }) {
         {name: 'Time', value: 'updatedAt'},
         {name: 'Score', value: 'score'},
         {name: 'Difficulty', value: 'difficulty'},
-        {name: 'User', value: 'user.email'}
+        {name: 'User', value: 'user.firstName'}
     ];
 
     useEffect(() => {
@@ -110,7 +110,7 @@ const Index = function ({ user }) {
                                 </div>
 
                                 <div className="float-right">
-                                    <small>{review.updatedAt.slice(0,10)}</small>
+                                    <small>{review.updatedAt.substring(0, review.updatedAt.length - 8).replace('T', ' ')}</small>
                                 </div>
                             </div>
 

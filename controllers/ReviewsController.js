@@ -33,16 +33,19 @@ exports.index = async (req, res) => {
     } 
     // console.log('searchTerm: ', searchTerm);
 
-    let sortBy = {updatedAt: 'desc'};
+    let sortBy = {updatedAt: -1};
     if (req.query.sortBy !== '') {
-      sortBy = {[req.query.sortBy]: 'desc'}
+      sortBy = {[req.query.sortBy]: -1}
     }
+    console.log('sortBy: ', sortBy);
         
     const reviews = await Review
       .find(searchTerm)
       .populate('user')
       .sort(sortBy);
-    // console.log('reviews: ', reviews);
+      
+    reviews.forEach(r => console.log(r.user.firstName))
+    // console.log('reviews.user: ', reviews.user);
 
     res.status(200).json(reviews);
 
