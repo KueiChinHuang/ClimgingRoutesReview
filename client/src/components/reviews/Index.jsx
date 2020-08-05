@@ -14,7 +14,7 @@ const Index = function ({ user }) {
         (async () => {
             await getReviews();
         })();
-    }, [searchTerms,]);
+    }, [searchTerms, sortBy]);
 
     const getReviews = async () => {
         const reviewsResp = await Axios.get('/api/reviews', {
@@ -30,7 +30,7 @@ const Index = function ({ user }) {
     const handleSortChange = async event => {
         event.persist();
         setSortBy(event.target.value);
-        console.log(sortBy);
+        // console.log(sortBy);
     };
 
     const deleteReview = async review => {

@@ -53,6 +53,11 @@ exports.index = async (req, res) => {
     // console.log('searchTerm: ', searchTerm);
 
     let sortBy = {updatedAt: 'desc'}
+    if (req.query.sortBy !== '') {
+      
+      console.log("in controller, req.query:", req.query);
+      
+    }
         
     const reviews = await Review
       .find(searchTerm)
