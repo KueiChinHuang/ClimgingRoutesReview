@@ -1,10 +1,5 @@
 # Doris' Climbing Gym Routes Review
-> This is a web application built using Node.js and React.js.
-
-## Introduction
-<p>
-This is an app for a rock-climbing gym. Climbers usually have some thoughts regarding the routes they've climbed. This app allow users to share their thoughts with other climbers, and also the gym and rock setters can improve the routes accordingly.
-</p>
+> This is an app for a rock-climbing gym. Climbers usually have some thoughts regarding the routes they've climbed. This app allow users to share their thoughts with other climbers, and also the gym and the rock setters can improve their routes accordingly.
 
 With this app, users can ...
 - Log in and log out
@@ -12,7 +7,7 @@ With this app, users can ...
 - Sort the reviews by time/score/difficulty/user
 - Search reviews using key words
 
-## Main techinique in this project
+## Main techiniques in this project
 
 Dadtabase
 - Mongo DB
