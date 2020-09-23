@@ -1,5 +1,5 @@
 # Doris' Climbing Gym Routes Review
-<p>This is an app for a rock-climbing gym. Climbers usually have some thoughts regarding the routes they've climbed. This app allow users to share their thoughts with other climbers, and also the gym and the rock setters can improve their routes accordingly.</p>
+<p>This is an app for a rock-climbing gym. This app allows climbers to share their thoughts regarding a specific route with other climbers. The rock setters can also improve the setting accordingly.</p>
 
 With this app, users can ...
 - Log in and log out
