@@ -2,13 +2,15 @@ html,
 body {
   height: 100%;
   width: 100%;
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('./climbing-2264698_1920.jpg');
-  background-attachment: fixed;  
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./climbing-2264698_1920.webp");
+  background-attachment: fixed;
   background-size: cover;
   color: #fff;
 }
 
-header:not(.home-cta), .alert {
+header:not(.home-cta),
+.alert {
   margin-bottom: 0;
 }
 
@@ -17,7 +19,8 @@ h1 {
 }
 
 /* Home page */
-.home-cta > h1, h4 {
+.home-cta > h1,
+h4 {
   color: white;
   position: absolute;
   top: 50%;
@@ -47,7 +50,7 @@ button.delete {
   margin: 0 10px 0 10px;
 }
 
-button.delete:hover{
+button.delete:hover {
   color: #0056b3;
 }
 
